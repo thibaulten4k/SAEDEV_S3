@@ -1,14 +1,18 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-public abstract class FabriquePoisson{
+import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Lamproie;
+
+public abstract class FabriquePoisson {
     int newX;
     int newY;
-    public FabriquePoisson(Environnement terrain){
-        newX = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
-        newY = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
+
+    public FabriquePoisson(Environnement terrain) {
+        newX = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase / 2;
+        newY = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase / 2;
     }
 
-    public abstract void creerPoissons( int typePoisson, Environnement terrain ); /*{
+    public abstract Poisson creerPoissons(Environnement terrain);
+    /*{
 
         int newX = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
         int newY = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
@@ -39,3 +43,4 @@ public abstract class FabriquePoisson{
     }
 }
 */
+}

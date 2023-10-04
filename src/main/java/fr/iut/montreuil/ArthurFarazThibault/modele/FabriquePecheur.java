@@ -1,4 +1,4 @@
-package fr.iut.montreuil.ArthurFarazThibault.modele;
+/*package fr.iut.montreuil.ArthurFarazThibault.modele;
 
 public class FabriquePecheur {
 
@@ -31,3 +31,4 @@ public class FabriquePecheur {
 
     }
 }
+*/
