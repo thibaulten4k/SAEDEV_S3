@@ -4,7 +4,7 @@ module com.example.towerdefense_sprint1 {
 
     requires org.controlsfx.controls;
    // requires org.junit.jupiter.api;
-    requires org.testng;
+    //requires org.testng;
     requires javafx.base;
     //requires org.testng;
 
