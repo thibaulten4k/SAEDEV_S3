@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.ArthurFarazThibault.controlleur.ControleurDemarrage">
+   <children>
+      <ImageView fitHeight="471.0" fitWidth="775.0" layoutX="-167.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../pkmFisherman.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="BoutonJouer" layoutX="250.0" layoutY="308.0" mnemonicParsing="false" onAction="#started" text="Bouton Jouer" />
+      <ImageView fitHeight="349.0" fitWidth="556.0" layoutX="23.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../River_Rush_title.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="78.0" fitWidth="272.0" layoutX="165.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../cliquer_Pour_Jouer.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

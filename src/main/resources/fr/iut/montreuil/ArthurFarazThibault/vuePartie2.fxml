@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.ArthurFarazThibault.controlleur.Controlleur">
+   <top>
+      <Pane fx:id="vueMap" onMouseClicked="#placerPecheur" prefHeight="320.0" prefWidth="480.0" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <HBox fx:id="menudejeu" prefHeight="385.0" prefWidth="480.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="160.0" prefWidth="300.0">
+               <children>
+                  <HBox prefHeight="112.5" prefWidth="120.0">
+                     <children>
+                        <VBox prefHeight="95.0" prefWidth="256.0">
+                           <children>
+                              <RadioButton fx:id="selectionnerHarponneur" mnemonicParsing="false" prefHeight="21.0" prefWidth="256.0" text="Harponneur">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                 <ToggleGroup fx:id="groupeRadio" />
+                                 </toggleGroup> </RadioButton>
+                              <Label prefHeight="26.0" prefWidth="264.0" text="Dgt/s: 13 Coût: 300 $ Portée: 3" />
+                              <Label prefHeight="16.0" prefWidth="271.0" text="Spécial: cibles multiples" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="112.5" prefWidth="120.0">
+                     <children>
+                        <VBox prefHeight="79.0" prefWidth="254.0">
+                           <children>
+                              <RadioButton fx:id="selectionnerLanceur" cache="true" mnemonicParsing="false" prefHeight="18.0" prefWidth="254.0" text="Lanceur" toggleGroup="$groupeRadio">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor>
+                              </RadioButton>
+                              <Label prefHeight="16.0" prefWidth="265.0" text="Délai: 7 Coût: 400 $ Portée: 1" />
+                              <Label prefHeight="16.0" prefWidth="257.0" text="Spécial: Relance poisson au début" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="112.5" prefWidth="120.0">
+                     <children>
+                        <VBox prefHeight="78.0" prefWidth="254.0">
+                           <children>
+                              <RadioButton fx:id="selectionnerArcher" mnemonicParsing="false" prefHeight="18.0" prefWidth="259.0" selected="true" text="Archer" toggleGroup="$groupeRadio">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor>
+                              </RadioButton>
+                              <Label prefHeight="16.0" prefWidth="256.0" text="Dgt/s: 14 Coût: 150 $ Portée: 3 " textAlignment="RIGHT" />
+                              <Label prefHeight="16.0" prefWidth="257.0" text="Spécial: Aucune" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="112.5" prefWidth="120.0">
+                     <children>
+                        <VBox prefHeight="95.0" prefWidth="259.0">
+                           <children>
+                              <RadioButton fx:id="selectionnerTremailleur" mnemonicParsing="false" prefHeight="18.0" prefWidth="268.0" text="Tremailleur" toggleGroup="$groupeRadio">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor>
+                              </RadioButton>
+                              <Label prefHeight="16.0" prefWidth="256.0" text="Délai: 7 Coût: 400 $ Portée: 1" />
+                              <Label prefHeight="16.0" prefWidth="257.0" text="Spécial: Ralentit poissons" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="240.0" prefWidth="120.0" />
+            <VBox prefHeight="240.0" prefWidth="199.0">
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="153.0">
+                     <children>
+                        <Label text="Pv: " />
+                        <Label fx:id="affichagePv" text="" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="153.0">
+                     <children>
+                        <Label text="Argent: " />
+                        <Label fx:id="affichageArgent" text="" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="153.0">
+                     <children>
+                        <Label text="Poissons : ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="affichagePoissons" text=" siu" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="153.0">
+                     <children>
+                        <Label text="Vague n°: ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="AffichageVague" text="" />
+                     </children>
+                  </HBox>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#marcheArrêt" text="Marche / Arrêt" textOverrun="CLIP" />
+                  <HBox prefHeight="12.0" prefWidth="153.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#vitesseMoitié" text="X 0.5" />
+                        <Button mnemonicParsing="false" onAction="#vitesseNormal" text="X 1" />
+                        <Button mnemonicParsing="false" onAction="#vitesseDoublé" text="X 2" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
