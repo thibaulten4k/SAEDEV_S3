@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Environnement {
 
+    private static Environnement uniqueInstance = null;
+
     private int nbColonnes;
     private int nbLignes;
     
@@ -36,8 +38,16 @@ public class Environnement {
         this.pvProperty =  new SimpleIntegerProperty(100) ;
         this.argentProperty = new SimpleIntegerProperty(350) ;
         this.argentMax = 2000;
-        this.vague = new Vague(this, 5,  100, 0, 0, 0, 25, 180) ;
+        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180) ;
         this.nbPoissonsTue = new SimpleIntegerProperty(0) ;
+    }
+
+    public static Environnement getInstance() {
+        if (uniqueInstance == null)
+            uniqueInstance = new Environnement(15, 10);
+
+        return uniqueInstance;
+
     }
 
     public void construire() {
@@ -83,7 +93,7 @@ public class Environnement {
             return terrain[x][y];
     }
 
-public Vague getVague(){
+    public Vague getVague(){
         return this.vague;
 }
 
@@ -199,12 +209,7 @@ public Vague getVague(){
         }
     }
 
-    public void ajouterPoisson( Poisson poisson ) {
-        this.listePoissons.add(poisson) ;
-        System.out.println("Poisson ajouté (saumon)");
-        System.out.println(poisson);
-
-    }
+    public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
 
     public ArrayList<Case> getParcours() { return this.parcours; }
 
@@ -213,8 +218,6 @@ public Vague getVague(){
         if ( this.getArgentPropertyValue() > argentMax )
             setArgentPropertyValue(argentMax);
     }
-
-    public int testAddition ()  { return 1+1 ; }
 
 }
 

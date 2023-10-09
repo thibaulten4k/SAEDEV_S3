@@ -11,10 +11,9 @@ public class Poisson extends Acteur{
     private int compteur;
 
     // Ici c'est 12 car le cercle est construit en partant du millieu
-    public Poisson(int x, int y, Environnement terrain, int vitesse, int pv, int recompense, int degat) {
-        super(terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2,
-              terrain.getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase/2,
-                terrain);
+    public Poisson(int x, int y, int vitesse, int pv, int recompense, int degat) {
+        super(Environnement.getInstance().getParcours().get(0).getX(),
+                Environnement.getInstance().getParcours().get(0).getY());
 
         this.vitesse = vitesse;
         this.pv = pv;
@@ -41,6 +40,7 @@ public class Poisson extends Acteur{
 
 
     public void actionUnTour() {
+        Environnement environnement = Environnement.getInstance();
 
         if (indiceParcours >= environnement.getParcours().size() -1) {
             environnement.setPvPropertyValue(environnement.getPvPropertyValue() - 5);

@@ -1,19 +1,12 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Esturgeon;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Saumon;
 
-public class FabriqueSaumon extends FabriquePoisson {
-
-    public FabriqueSaumon(Environnement terrain) {
-        super(terrain);
-    }
-
+public class FabriqueSaumon extends ForgePoisson {
+    public FabriqueSaumon() { super(); }
 
     @Override
-    public Poisson creerPoissons(Environnement terrain) {
-        return new Saumon(newX, newY, terrain);
-
-
+    public Poisson creerPoissons(int x, int y) {
+        return new Saumon(x, y);
     }
 }
