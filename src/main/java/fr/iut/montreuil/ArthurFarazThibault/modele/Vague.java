@@ -22,7 +22,8 @@ public class Vague {
 
     private int delai;
     private int compteurDelai;
-    private LinkedList<Integer> fileAttente;
+    private LinkedList<Poisson> fileAttente;
+    private FabriquePoisson FabriquePoisson;
 
 
     public Vague (Environnement terrain, int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai) {
@@ -44,6 +45,9 @@ public class Vague {
         this.fileAttente = new LinkedList<Poisson>();
 
     }
+    public void setFabrique(FabriquePoisson FabriquePoisson){
+        this.FabriquePoisson = FabriquePoisson;
+    }
 
     public void setCompteurObjectif(int compteurObjectif) { this.compteurObjectif = compteurObjectif; }
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }
@@ -57,17 +61,28 @@ public class Vague {
         double aleatoire = Math.random() ;
         Poisson typePoisson;
 
-        if ( aleatoire >= 0 && aleatoire < tauxSaumon )
-            typePoisson = 1;
+        if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
+            setFabrique(new FabriqueSaumon(environnement));
+            typePoisson = FabriquePoisson.creerPoissons(environnement);
+        }
 
-        else if (aleatoire < tauxAlose)
-            typePoisson = 2;
+        else if (aleatoire < tauxAlose){
+            setFabrique(new FabriqueAlose(environnement));
+            typePoisson = FabriquePoisson.creerPoissons(environnement);
+        }
 
-        else if (aleatoire < tauxLamproie )
-            typePoisson = 3;
 
-        else
-            typePoisson = 4;
+        else if (aleatoire < tauxLamproie ){
+            setFabrique(new FabriqueLamproie(environnement));
+            typePoisson = FabriquePoisson.creerPoissons(environnement);
+        }
+
+
+        else{
+            setFabrique(new FabriqueEsturgeon(environnement));
+            typePoisson = FabriquePoisson.creerPoissons(environnement);
+        }
+
 
 
         fileAttente.addFirst(typePoisson);
@@ -76,7 +91,7 @@ public class Vague {
     public void ajouterPoissonDansEnvironnement() {
 
         if (compteurDelai == delai && fileAttente.size() >= 1) {
-            Fabrique.creerPoissons(fileAttente.pollLast(), environnement);
+            this.environnement.ajouterPoisson(fileAttente.pollLast());
             compteurDelai = 0;
         }
 
