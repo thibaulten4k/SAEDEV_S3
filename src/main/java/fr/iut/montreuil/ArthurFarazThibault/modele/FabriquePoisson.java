@@ -1,46 +1,41 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Alose;
+import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Esturgeon;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Lamproie;
+import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Saumon;
 
-public abstract class FabriquePoisson {
-    int newX;
-    int newY;
+public class FabriquePoisson {
 
     public FabriquePoisson(Environnement terrain) {
-        newX = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase / 2;
-        newY = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase / 2;
+
     }
 
-    public abstract Poisson creerPoissons(Environnement terrain);
-    /*{
+    public Poisson creerPoissons(Environnement terrain, String typePoisson){
 
         int newX = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
         int newY = terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2 ;
         Poisson poisson ;
 
         switch (typePoisson) {
-            case 1:
+            case "Saumon":
                 poisson = new Saumon( newX , newY, terrain ) ;
-                terrain.ajouterPoisson(poisson);
                 break;
 
-            case 2:
+            case "Alose":
                 poisson = new Alose( newX, newY, terrain ) ;
-                terrain.ajouterPoisson(poisson);
                 break;
 
-            case 3:
-                poisson = new Esturgeon ( newX, newY, terrain ) ;
-                terrain.ajouterPoisson(poisson);
+            case "Esturgeon":
+                poisson = new Esturgeon( newX, newY, terrain ) ;
                 break;
 
-            case 4:
+            case "Lamproie":
                 poisson = new Lamproie( newX, newY, terrain ) ;
-                terrain.ajouterPoisson(poisson);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + typePoisson);
         }
-
+        return poisson;
     }
-}
-*/
 }

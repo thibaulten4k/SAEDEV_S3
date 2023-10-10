@@ -29,6 +29,7 @@ public class Vague {
     public Vague (Environnement terrain, int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai) {
 
         this.environnement = terrain ;
+        this.FabriquePoisson = new FabriquePoisson(terrain);
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
 
@@ -45,9 +46,6 @@ public class Vague {
         this.fileAttente = new LinkedList<Poisson>();
 
     }
-    public void setFabrique(FabriquePoisson FabriquePoisson){
-        this.FabriquePoisson = FabriquePoisson;
-    }
 
     public void setCompteurObjectif(int compteurObjectif) { this.compteurObjectif = compteurObjectif; }
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }
@@ -62,31 +60,21 @@ public class Vague {
         Poisson typePoisson;
 
         if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
-            setFabrique(new FabriqueSaumon(environnement));
-            typePoisson = FabriquePoisson.creerPoissons(environnement);
+            typePoisson = FabriquePoisson.creerPoissons(environnement, "Saumon");
         }
-
         else if (aleatoire < tauxAlose){
-            setFabrique(new FabriqueAlose(environnement));
-            typePoisson = FabriquePoisson.creerPoissons(environnement);
+            typePoisson = FabriquePoisson.creerPoissons(environnement, "Alose");
         }
-
-
         else if (aleatoire < tauxLamproie ){
-            setFabrique(new FabriqueLamproie(environnement));
-            typePoisson = FabriquePoisson.creerPoissons(environnement);
+            typePoisson = FabriquePoisson.creerPoissons(environnement, "Lamproie");
         }
-
-
         else{
-            setFabrique(new FabriqueEsturgeon(environnement));
-            typePoisson = FabriquePoisson.creerPoissons(environnement);
+            typePoisson = FabriquePoisson.creerPoissons(environnement, "Esturgeon");
         }
-
-
-
         fileAttente.addFirst(typePoisson);
     }
+
+
 
     public void ajouterPoissonDansEnvironnement() {
 
@@ -101,11 +89,6 @@ public class Vague {
         tauxAlose += tauxSaumon;
         tauxLamproie += tauxAlose;
         tauxEsturgeon += tauxLamproie;
-
-        System.out.println(tauxSaumon);
-        System.out.println(tauxAlose);
-        System.out.println(tauxLamproie);
-        System.out.println(tauxEsturgeon);
     }
 
     public void incrementerLesTaux(double taux) {
@@ -115,7 +98,6 @@ public class Vague {
             tauxLamproie -= tauxSaumon;
         if (tauxEsturgeon - tauxSaumon >= 0)
             tauxEsturgeon  -= tauxSaumon;
-
         tauxSaumon -= taux;
 
         double aleatoire = Math.random();
