@@ -86,12 +86,7 @@ public class Environnement {
 
     }
 
-    public Case getCase(int x, int y) {
-        if (x < 0 || x >= nbLignes || y < 0 || y >= nbColonnes)
-            return null;
-        else
-            return terrain[x][y];
-    }
+
 
     public Vague getVague(){
         return this.vague;
@@ -130,29 +125,6 @@ public class Environnement {
                 return true;
 
         return false;
-    }
-
-    public Case getAdjacent (Case traite, ArrayList<Case> parcours ) {
-
-        Case testé;
-        int[] modif = {1, -1};
-
-        //Ici c'est les X
-        for (int i = 0; i < modif.length; i++) {
-            testé = this.getCase(traite.getY() + modif[i], traite.getX());
-
-            if (testé != null && testé.getPoids() == 0 && !parcours.contains(testé))
-                return testé;
-        }
-
-        //Ici c'est les Y
-        for (int i = 0; i < modif.length; i++) {
-            testé = this.getCase(traite.getY(), traite.getX() + modif[i]);
-
-            if ( testé != null && testé.getPoids() == 0 && ! parcours.contains(testé) )
-                return testé ;
-        }
-        return null;
     }
 
     public void faireUnTour() {
