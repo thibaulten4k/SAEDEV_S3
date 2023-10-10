@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Environnement {
 
-    private static Environnement uniqueInstance = null;
+    private static Environnement uniqueInstance = new Environnement(15, 10);
 
     private int nbColonnes;
     private int nbLignes;
@@ -43,8 +43,8 @@ public class Environnement {
     }
 
     public static Environnement getInstance() {
-        if (uniqueInstance == null)
-            uniqueInstance = new Environnement(15, 10);
+        /*if (uniqueInstance == null)
+            uniqueInstance = new Environnement(15, 10);*/
 
         return uniqueInstance;
 

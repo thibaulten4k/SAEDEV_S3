@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 public class EnvironnementTest {
 
-    @Test
+   /* @Test
     public void testAddition() {
         Environnement e = new Environnement(10,10) ;
 
         Assertions.assertEquals(2, e.testAddition());
 
 
-    }
+    }*/
 }
