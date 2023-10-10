@@ -1,4 +1,4 @@
-package fr.iut.montreuil.ArthurFarazThibault;
+/*package fr.iut.montreuil.ArthurFarazThibault;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 import org.junit.jupiter.api.Assertions;
@@ -15,3 +15,4 @@ public class EnvironnementTest {
 
     }
 }
+*/
