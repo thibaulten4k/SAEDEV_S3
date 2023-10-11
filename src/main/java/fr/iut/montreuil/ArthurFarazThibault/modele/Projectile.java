@@ -10,7 +10,7 @@ public abstract class Projectile extends Acteur {
 
     private double coefX;
     private double coefY;
-    private double magnitude;
+    private double magnitude; //on s'amuse bien lors de cette saé !!!
 
     public Projectile(int x, int y, int vitesse, int degat, int taille, int dureeDeVie, Poisson cible) {
         super(x, y);
@@ -29,7 +29,7 @@ public abstract class Projectile extends Acteur {
     public int getDureeDeVie() { return dureeDeVie; }
     public int getDegat() { return degat; }
 
-    public void soustraireDureeDeVie(int mallus) { dureeDeVie += - mallus; }
+    public void soustraireDureeDeVie(int mallus) { dureeDeVie += -mallus; }
 
     public double calculerCoefX(Poisson p) {return p.getXpropertyValue() - this.getXpropertyValue();}
     public double calculerCoefY(Poisson p) {
