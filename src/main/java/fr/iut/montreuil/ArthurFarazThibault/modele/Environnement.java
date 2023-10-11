@@ -128,7 +128,6 @@ public class Environnement {
     }
 
     public void faireUnTour() {
-
         if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
 
             for (Pecheur p : listePecheurs) {
@@ -165,7 +164,6 @@ public class Environnement {
     }
 
     public void ajouterPecheur(Pecheur pecheur) {
-
         if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
             System.out.println("Il y a un obstacle sur cette case !");
         }
@@ -179,6 +177,7 @@ public class Environnement {
             this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCoût());
             this.listePecheurs.add(pecheur);
         }
+
     }
 
     public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
