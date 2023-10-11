@@ -1,5 +1,10 @@
 /*package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Archer;
+import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Tremailleur;
+
 public class FabriquePecheur {
 
     public static void creerPecheur ( double x, double y, int typePecheur, Environnement environnement ) {
