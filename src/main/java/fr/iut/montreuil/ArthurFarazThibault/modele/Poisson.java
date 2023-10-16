@@ -41,42 +41,61 @@ public class Poisson extends Acteur{
 
 
     public void actionUnTour() {
-
-        if (indiceParcours >= environnement.getParcours().size() -1) {
-            environnement.setPvPropertyValue(environnement.getPvPropertyValue() - 5);
-            this.setPv(0);
-            this.setRecompense(0);
-            environnement.subirDegat(degat);
+        if (this.estSortiDuTerrain()) {
+            this.meurt();
         } else {
-            Case caseActuel = environnement.getParcours().get(indiceParcours);
-            Case caseSuivante = environnement.getParcours().get(indiceParcours + 1);
-
-            if (caseActuel.getX() < caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() + vitesse);
-            }
-            if (caseActuel.getX() > caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() - vitesse);
-            }
-            if (caseActuel.getY() < caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() + vitesse);
-            }
-            if (caseActuel.getY() > caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() - vitesse);
-            }
-            compteur  = compteur + vitesse;
+            this.seDeplace();
         }
-
-        if (compteur >= Case.tailleCase) {
-            indiceParcours++;
-            compteur = 0;
-            setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getX());
-            setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getY());
+        if (this.aDepasseCaseCible()) {
+            this.replacePoisson();
         }
+    }
 
+    public void replacePoisson(){
+        this.indiceParcours++;
+        this.compteur = 0;
+        setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * this.environnement.getParcours().get(this.indiceParcours).getX());
+        setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * this.environnement.getParcours().get(this.indiceParcours).getY());
+    }
+
+    public boolean aDepasseCaseCible(){
+        return this.compteur >= Case.tailleCase;
+    }
+
+    public boolean estSortiDuTerrain(){
+        return this.indiceParcours >= this.environnement.getParcours().size() -1;
+    }
+
+    public void meurt(){
+        this.environnement.setPvPropertyValue(this.environnement.getPvPropertyValue() - 5);
+        this.setPv(0);
+        this.setRecompense(0);
+        this.environnement.subirDegat(degat);
+    }
+
+
+    public void seDeplace(){
+
+        Case caseActuel = this.environnement.getParcours().get(this.indiceParcours);
+        Case caseSuivante = this.environnement.getParcours().get(this.indiceParcours + 1);
+
+        if (caseActuel.getX() < caseSuivante.getX()) {
+            setXpropertyValue(getXpropertyValue() + this.vitesse);
+        }
+        if (caseActuel.getX() > caseSuivante.getX()) {
+            setXpropertyValue(getXpropertyValue() - this.vitesse);
+        }
+        if (caseActuel.getY() < caseSuivante.getY()) {
+            setYpropertyValue(getYpropertyValue() + this.vitesse);
+        }
+        if (caseActuel.getY() > caseSuivante.getY()) {
+            setYpropertyValue(getYpropertyValue() - this.vitesse);
+        }
+        this.compteur  = this.compteur + this.vitesse;
     }
 
     public int getVitesse() {
-        return vitesse;
+        return this.vitesse;
     }
 
     public String toString() { return "Poisson : " + this.id; }
