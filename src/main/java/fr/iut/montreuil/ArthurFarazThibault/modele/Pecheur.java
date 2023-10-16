@@ -23,7 +23,7 @@ public abstract class Pecheur extends Acteur{
     public void actionUnTour() {
         if (compteurDelai == delai) {
             for (Poisson p : environnement.getListePoissons()) {
-                if ( aPorterDuPecheur(p) && compteurDelai == delai)  {
+                if ( aPorteeDuPecheur(p) && compteurDelai == delai)  {
                     attaquer(p);
                     compteurDelai = 0;
                 }
@@ -35,7 +35,7 @@ public abstract class Pecheur extends Acteur{
 
     }
 
-    public boolean aPorterDuPecheur(Poisson p) {
+    public boolean aPorteeDuPecheur(Poisson p) {
         return ( ( Math.abs(p.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(p.getYpropertyValue() - this.getYpropertyValue()) ) <= this.portee * Case.tailleCase + (Case.tailleCase/2) );
     }
 
