@@ -26,20 +26,23 @@ public class Environnement {
     private IntegerProperty nbPoissonsTue ;
 
     public Environnement(int largeur, int hauteur) {
-
         this.nbColonnes = largeur;
         this.nbLignes = hauteur;
 
         this.listePoissons = FXCollections.observableArrayList();
         this.listePecheurs = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
+
         this.terrain = new Case[hauteur][largeur];
         this.construire();
-        this.pvProperty =  new SimpleIntegerProperty(100) ;
-        this.argentProperty = new SimpleIntegerProperty(350) ;
+        this.pvProperty =  new SimpleIntegerProperty(100);
+        this.argentProperty = new SimpleIntegerProperty(350);
         this.argentMax = 2000;
-        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180) ;
-        this.nbPoissonsTue = new SimpleIntegerProperty(0) ;
+        this.nbPoissonsTue = new SimpleIntegerProperty(0);
+    }
+
+    public void setVague() {
+        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180);
     }
 
     public static Environnement getInstance() {
@@ -51,17 +54,16 @@ public class Environnement {
     }
 
     public void construire() {
-
         for (int col = 0; col < this.nbLignes; col++) {
             for (int lig = 0; lig < this.nbColonnes; lig++) {
                 this.terrain[col][lig] = new Case(col, lig, 1);
             }
         }
+
     }
 
     //salut c'est moi
     public void chargement(int[] carte) {
-
         int curseur = 0;
 
         for (int col = 0; col < this.nbLignes; col++) {
@@ -72,12 +74,10 @@ public class Environnement {
         }
 
         AlgoChemin chemin = new AlgoChemin(this);
-        parcours = chemin.trouverParcours();
-
+        this.parcours = chemin.trouverParcours();
     }
 
     public void subirDegat(int degat) {
-
         if ( (pvProperty.getValue() - degat) >= 0 )
         pvProperty.setValue(pvProperty.getValue() - degat);
         else {
@@ -90,7 +90,7 @@ public class Environnement {
 
     public Vague getVague(){
         return this.vague;
-}
+    }
 
     public int getNbColonnes() { return nbColonnes; }
     public int getNbLignes() { return nbLignes; }
@@ -117,6 +117,7 @@ public class Environnement {
                 return true;
         }
         return false;
+
     }
 
     public boolean caseOccupee(int x, int y) {
@@ -185,9 +186,10 @@ public class Environnement {
     public ArrayList<Case> getParcours() { return this.parcours; }
 
     public void recupArgent ( int argent ) {
-        this.setArgentPropertyValue(getArgentPropertyValue() + argent );
+        this.setArgentPropertyValue(getArgentPropertyValue() + argent);
         if ( this.getArgentPropertyValue() > argentMax )
             setArgentPropertyValue(argentMax);
+
     }
 
 }

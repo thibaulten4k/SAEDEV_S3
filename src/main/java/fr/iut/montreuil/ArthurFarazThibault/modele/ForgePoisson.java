@@ -14,6 +14,7 @@ public abstract class ForgePoisson {
     public void forgerPoisson() {
         Poisson p = creerPoissons(newX, newY);
         Environnement.getInstance().ajouterAListePoisson(p);
+
     }
 
 }
