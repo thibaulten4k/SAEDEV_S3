@@ -5,9 +5,9 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 
 public class Alose extends Poisson {
 
-    public Alose ( int x, int y, Environnement terrain ) {
+    public Alose ( int x, int y) {
 
-        super( x,y, terrain, 4, 35, 15, 7) ;
+        super( x, y, 4, 35, 15, 7) ;
 
     }
 

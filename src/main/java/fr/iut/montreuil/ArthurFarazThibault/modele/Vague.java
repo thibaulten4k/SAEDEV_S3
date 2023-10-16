@@ -45,8 +45,8 @@ public class Vague {
         this.fileAttente = new LinkedList<Poisson>();
 
     }
-    public void setFabrique(FabriquePoisson fabriquePoisson){
-        this.FabriquePoisson = fabriquePoisson;
+    public void setFabrique(FabriquePoisson FabriquePoisson){
+        this.FabriquePoisson = FabriquePoisson;
     }
 
     public void setCompteurObjectif(int compteurObjectif) { this.compteurObjectif = compteurObjectif; }

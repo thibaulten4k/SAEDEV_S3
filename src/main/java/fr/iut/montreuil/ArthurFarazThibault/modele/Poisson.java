@@ -11,10 +11,9 @@ public class Poisson extends Acteur{
     private int compteur;
 
     // Ici c'est 12 car le cercle est construit en partant du millieu
-    public Poisson(int x, int y, Environnement terrain, int vitesse, int pv, int recompense, int degat) {
-        super(terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2,
-              terrain.getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase/2,
-                terrain);
+    public Poisson(int x, int y, int vitesse, int pv, int recompense, int degat) {
+        super(Environnement.getInstance().getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2,
+              Environnement.getInstance().getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase/2);
 
         this.vitesse = vitesse;
         this.pv = pv;
@@ -54,8 +53,8 @@ public class Poisson extends Acteur{
     public void replacePoisson(){
         this.indiceParcours++;
         this.compteur = 0;
-        setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * this.environnement.getParcours().get(this.indiceParcours).getX());
-        setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * this.environnement.getParcours().get(this.indiceParcours).getY());
+        setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * Environnement.getInstance().getParcours().get(this.indiceParcours).getX());
+        setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * Environnement.getInstance().getParcours().get(this.indiceParcours).getY());
     }
 
     public boolean aDepasseCaseCible(){
@@ -63,21 +62,21 @@ public class Poisson extends Acteur{
     }
 
     public boolean estSortiDuTerrain(){
-        return this.indiceParcours >= this.environnement.getParcours().size() -1;
+        return this.indiceParcours >= Environnement.getInstance().getParcours().size() -1;
     }
 
     public void meurt(){
-        this.environnement.setPvPropertyValue(this.environnement.getPvPropertyValue() - 5);
+        Environnement.getInstance().setPvPropertyValue(Environnement.getInstance().getPvPropertyValue() - 5);
         this.setPv(0);
         this.setRecompense(0);
-        this.environnement.subirDegat(degat);
+        Environnement.getInstance().subirDegat(degat);
     }
 
 
     public void seDeplace(){
 
-        Case caseActuel = this.environnement.getParcours().get(this.indiceParcours);
-        Case caseSuivante = this.environnement.getParcours().get(this.indiceParcours + 1);
+        Case caseActuel = Environnement.getInstance().getParcours().get(this.indiceParcours);
+        Case caseSuivante = Environnement.getInstance().getParcours().get(this.indiceParcours + 1);
 
         if (caseActuel.getX() < caseSuivante.getX()) {
             setXpropertyValue(getXpropertyValue() + this.vitesse);

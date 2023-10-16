@@ -6,8 +6,8 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 
 public class Lanceur extends Pecheur {
 
-    public Lanceur(int x, int y, Environnement terrain) {
-        super(x, y, terrain, 420, 1, 400);
+    public Lanceur(int x, int y) {
+        super(x, y, 420, 1, 400);
     }
 
     @Override
