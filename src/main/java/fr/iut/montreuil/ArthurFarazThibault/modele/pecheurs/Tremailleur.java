@@ -7,14 +7,14 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Filet;
 
 public class Tremailleur extends Pecheur {
-    public Tremailleur(int x, int y, Environnement terrain) {
-        super(x, y, terrain, 180, 3, 200);
+    public Tremailleur(int x, int y) {
+        super(x, y, 180, 3, 200);
     }
 
     @Override
     public void attaquer(Poisson p) {
-        Projectile proj = new Filet(this.getXpropertyValue(), this.getYpropertyValue(), environnement, p);
-        environnement.getListeProjectiles().add(proj);
+        Projectile proj = new Filet(this.getXpropertyValue(), this.getYpropertyValue(), p);
+        Environnement.getInstance().getListeProjectiles().add(proj);
     }
 
 }

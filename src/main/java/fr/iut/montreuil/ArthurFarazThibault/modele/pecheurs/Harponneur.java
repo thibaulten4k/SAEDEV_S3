@@ -8,13 +8,13 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Harpon;
 
 public class Harponneur extends Pecheur {  // la légende raconte que le harpon à la même portée que les bras de Robin
 
-    public Harponneur(int x, int y, Environnement terrain) {
-        super(x, y, terrain, 60, 3, 300);
+    public Harponneur(int x, int y) {
+        super(x, y, 60, 3, 300);
     }
 
     @Override
     public void attaquer(Poisson p) {
-        Projectile proj = new Harpon(this.getXpropertyValue(), this.getYpropertyValue(), environnement, p);
-        environnement.getListeProjectiles().add(proj);
+        Projectile proj = new Harpon(this.getXpropertyValue(), this.getYpropertyValue(), p);
+        Environnement.getInstance().getListeProjectiles().add(proj);
     }
 }

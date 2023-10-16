@@ -6,13 +6,13 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 
 public class Harpon extends Projectile {
 
-    public Harpon (int x, int y, Environnement terrain, Poisson p) {
-        super(x, y, terrain, 12, 13, 8, 100, p);
+    public Harpon (int x, int y, Poisson p) {
+        super(x, y, 12, 13, 8, 100, p);
     }
 
     public void attaquer() {
 
-        for (Poisson p : environnement.getListePoissons()) {
+        for (Poisson p : Environnement.getInstance().getListePoissons()) {
             if (poissonToucher(p)) {
                 p.subirDegat(this.getDegat());
                 soustraireDureeDeVie(getDureeDeVie());
