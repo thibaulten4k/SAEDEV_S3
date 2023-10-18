@@ -10,17 +10,17 @@ public abstract class Acteur {
     // Robin Castel
 
     protected IntegerProperty xProperty, yproperty;
-    protected Environnement environnement;
 
     protected String id;
     protected static long compteur;
 
-    public Acteur (int x, int y, Environnement terrain) {
+    public Acteur (int x, int y) {
         this.xProperty = new SimpleIntegerProperty(x);
         this.yproperty = new SimpleIntegerProperty(y);
-        this.environnement = terrain;
+
         this.id = "A" + compteur;
         compteur++;
+
     }
 
     public void setXpropertyValue(int x) {

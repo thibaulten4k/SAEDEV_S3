@@ -7,10 +7,11 @@ import java.util.LinkedList;
 
 public class Vague {
 
-    private Environnement environnement;
     private double tauxSpawn;
 
     public IntegerProperty numVague;
+
+    private ForgePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
@@ -22,12 +23,9 @@ public class Vague {
 
     private int delai;
     private int compteurDelai;
-    private LinkedList<Integer> fileAttente;
 
 
-    public Vague (Environnement terrain, int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai) {
-
-        this.environnement = terrain ;
+    public Vague (int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai) {
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
 
@@ -41,44 +39,44 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
-        this.fileAttente = new LinkedList<Poisson>();
+        this.ForgePoisson = new ForgePoisson();
+
 
     }
 
-    public void setCompteurObjectif(int compteurObjectif) { this.compteurObjectif = compteurObjectif; }
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }
-
     public IntegerProperty getNumVagueProperty(){ return numVague; }
     public int getNumVague(){ return numVague.getValue(); }
-    public void setNumVague(int num){ this.numVague=new SimpleIntegerProperty(num); }
 
-    public void ajouterPoissonDansFileAttente() {
-
+    public void ajouterPoisson() {
         double aleatoire = Math.random() ;
-        Poisson typePoisson;
+        String typePoisson;
 
-        if ( aleatoire >= 0 && aleatoire < tauxSaumon )
-            typePoisson = 1;
+        if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
+            typePoisson = "Saumon";
+        }
+        else if (aleatoire < tauxAlose){
+            typePoisson = "Alose";
+        }
+        else if (aleatoire < tauxLamproie ){
+            typePoisson = "Lamproie";
+        }
+        else{
+            typePoisson = "Esturgeon";
+        }
+        this.ForgePoisson.forgerPoisson(typePoisson);
 
-        else if (aleatoire < tauxAlose)
-            typePoisson = 2;
-
-        else if (aleatoire < tauxLamproie )
-            typePoisson = 3;
-
-        else
-            typePoisson = 4;
-
-
-        fileAttente.addFirst(typePoisson);
+        compteurDelai = 0;
     }
 
-    public void ajouterPoissonDansEnvironnement() {
+    public void actionUnTour() {
+        compteurDelai++;
 
-        if (compteurDelai == delai && fileAttente.size() >= 1) {
-            Fabrique.creerPoissons(fileAttente.pollLast(), environnement);
-            compteurDelai = 0;
-        }
+        if (compteurDelai >= delai)
+            ajouterPoisson();
+
+        if (compteurObjectif == objectif)
+            evolutionVague();
 
     }
 
@@ -87,10 +85,6 @@ public class Vague {
         tauxLamproie += tauxAlose;
         tauxEsturgeon += tauxLamproie;
 
-        System.out.println(tauxSaumon);
-        System.out.println(tauxAlose);
-        System.out.println(tauxLamproie);
-        System.out.println(tauxEsturgeon);
     }
 
     public void incrementerLesTaux(double taux) {
@@ -115,28 +109,7 @@ public class Vague {
         calculerLesTaux();
     }
 
-    public boolean spawnPas() { return Math.random() > tauxSpawn; }
-
-    public void actionUnTour() {
-
-        compteurDelai++;
-
-        if (compteurDelai > delai)
-            compteurDelai = delai;
-
-        if (!spawnPas()) {
-            ajouterPoissonDansFileAttente();
-        }
-
-        ajouterPoissonDansEnvironnement();
-
-        if (compteurObjectif == objectif)
-            evolutionVague();
-
-    }
-
     public void evolutionVague() {
-
             objectif = (int)(objectif * 1.2);
             compteurObjectif = 0;
 

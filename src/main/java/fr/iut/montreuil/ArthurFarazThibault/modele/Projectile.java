@@ -10,10 +10,10 @@ public abstract class Projectile extends Acteur {
 
     private double coefX;
     private double coefY;
-    private double magnitude;
+    private double magnitude; //on s'amuse bien lors de cette saé !!!
 
-    public Projectile(int x, int y, Environnement terrain, int vitesse, int degat, int taille, int dureeDeVie, Poisson cible) {
-        super(x, y, terrain);
+    public Projectile(int x, int y, int vitesse, int degat, int taille, int dureeDeVie, Poisson cible) {
+        super(x, y);
 
         this.vitesse = vitesse;
         this.degat = degat;
@@ -29,7 +29,7 @@ public abstract class Projectile extends Acteur {
     public int getDureeDeVie() { return dureeDeVie; }
     public int getDegat() { return degat; }
 
-    public void soustraireDureeDeVie(int mallus) { dureeDeVie += - mallus; }
+    public void soustraireDureeDeVie(int mallus) { dureeDeVie += -mallus; }
 
     public double calculerCoefX(Poisson p) {return p.getXpropertyValue() - this.getXpropertyValue();}
     public double calculerCoefY(Poisson p) {
@@ -59,7 +59,7 @@ public abstract class Projectile extends Acteur {
 
     }
 
-    public boolean dansLeTerrain() { return (getXpropertyValue() >= 0 && getXpropertyValue() <= environnement.getNbColonnes() * Case.tailleCase && getYpropertyValue() >= 0 && getYpropertyValue() <= environnement.getNbLignes() * Case.tailleCase); }
+    public boolean dansLeTerrain() { return (getXpropertyValue() >= 0 && getXpropertyValue() <= Environnement.getInstance().getNbColonnes() * Case.tailleCase && getYpropertyValue() >= 0 && getYpropertyValue() <= Environnement.getInstance().getNbLignes() * Case.tailleCase); }
 
     public abstract void attaquer();
 

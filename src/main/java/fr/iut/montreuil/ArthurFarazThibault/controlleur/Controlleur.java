@@ -2,7 +2,7 @@ package fr.iut.montreuil.ArthurFarazThibault.controlleur;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Fabrique;
+import fr.iut.montreuil.ArthurFarazThibault.modele.ForgePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
 import javafx.event.ActionEvent;
@@ -114,9 +114,10 @@ public class Controlleur implements Initializable {
 
         creerSpritesBoutonsRadio();
 
-        this.environnement = new Environnement(15,10);
+        this.environnement = Environnement.getInstance();
 
         this.environnement.chargement(niveau2);
+        this.environnement.setVague();
         vueTerrain vue = new vueTerrain(environnement, vueMap, Case.tailleCase);
 
         this.environnement.getListePoissons().addListener(new ObservateurListePoissons(this.vueMap));
@@ -162,16 +163,16 @@ public class Controlleur implements Initializable {
     @FXML
     public void placerPecheur(MouseEvent event) {
         if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            Fabrique.creerPecheur(event.getX(), event.getY(), 1, environnement);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            Fabrique.creerPecheur(event.getX(), event.getY(), 2, environnement);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            Fabrique.creerPecheur(event.getX(), event.getY(), 3, environnement);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
         }
         else {
-            Fabrique.creerPecheur(event.getX(), event.getY(), 4, environnement);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
         }
 
     }

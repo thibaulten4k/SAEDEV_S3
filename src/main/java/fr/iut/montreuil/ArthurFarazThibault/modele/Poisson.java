@@ -11,10 +11,9 @@ public class Poisson extends Acteur{
     private int compteur;
 
     // Ici c'est 12 car le cercle est construit en partant du millieu
-    public Poisson(int x, int y, Environnement terrain, int vitesse, int pv, int recompense, int degat) {
-        super(terrain.getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2,
-              terrain.getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase/2,
-                terrain);
+    public Poisson(int x, int y, int vitesse, int pv, int recompense, int degat) {
+        super(Environnement.getInstance().getParcours().get(0).getX() * Case.tailleCase + Case.tailleCase/2,
+              Environnement.getInstance().getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase/2);
 
         this.vitesse = vitesse;
         this.pv = pv;
@@ -41,42 +40,61 @@ public class Poisson extends Acteur{
 
 
     public void actionUnTour() {
-
-        if (indiceParcours >= environnement.getParcours().size() -1) {
-            environnement.setPvPropertyValue(environnement.getPvPropertyValue() - 5);
-            this.setPv(0);
-            this.setRecompense(0);
-            environnement.subirDegat(degat);
+        if (this.estSortiDuTerrain()) {
+            this.meurt();
         } else {
-            Case caseActuel = environnement.getParcours().get(indiceParcours);
-            Case caseSuivante = environnement.getParcours().get(indiceParcours + 1);
-
-            if (caseActuel.getX() < caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() + vitesse);
-            }
-            if (caseActuel.getX() > caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() - vitesse);
-            }
-            if (caseActuel.getY() < caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() + vitesse);
-            }
-            if (caseActuel.getY() > caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() - vitesse);
-            }
-            compteur  = compteur + vitesse;
+            this.seDeplace();
         }
-
-        if (compteur >= Case.tailleCase) {
-            indiceParcours++;
-            compteur = 0;
-            setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getX());
-            setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getY());
+        if (this.aDepasseCaseCible()) {
+            this.replacePoisson();
         }
+    }
 
+    public void replacePoisson(){
+        this.indiceParcours++;
+        this.compteur = 0;
+        setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * Environnement.getInstance().getParcours().get(this.indiceParcours).getX());
+        setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * Environnement.getInstance().getParcours().get(this.indiceParcours).getY());
+    }
+
+    public boolean aDepasseCaseCible(){
+        return this.compteur >= Case.tailleCase;
+    }
+
+    public boolean estSortiDuTerrain(){
+        return this.indiceParcours >= Environnement.getInstance().getParcours().size() -1;
+    }
+
+    public void meurt(){
+        Environnement.getInstance().setPvPropertyValue(Environnement.getInstance().getPvPropertyValue() - 5);
+        this.setPv(0);
+        this.setRecompense(0);
+        Environnement.getInstance().subirDegat(degat);
+    }
+
+
+    public void seDeplace(){
+
+        Case caseActuel = Environnement.getInstance().getParcours().get(this.indiceParcours);
+        Case caseSuivante = Environnement.getInstance().getParcours().get(this.indiceParcours + 1);
+
+        if (caseActuel.getX() < caseSuivante.getX()) {
+            setXpropertyValue(getXpropertyValue() + this.vitesse);
+        }
+        if (caseActuel.getX() > caseSuivante.getX()) {
+            setXpropertyValue(getXpropertyValue() - this.vitesse);
+        }
+        if (caseActuel.getY() < caseSuivante.getY()) {
+            setYpropertyValue(getYpropertyValue() + this.vitesse);
+        }
+        if (caseActuel.getY() > caseSuivante.getY()) {
+            setYpropertyValue(getYpropertyValue() - this.vitesse);
+        }
+        this.compteur  = this.compteur + this.vitesse;
     }
 
     public int getVitesse() {
-        return vitesse;
+        return this.vitesse;
     }
 
     public String toString() { return "Poisson : " + this.id; }
