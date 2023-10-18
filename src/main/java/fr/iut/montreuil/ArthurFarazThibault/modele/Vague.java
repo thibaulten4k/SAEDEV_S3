@@ -39,34 +39,35 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
+
         this.ForgePoisson = new ForgePoisson();
 
 
     }
-
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }
     public IntegerProperty getNumVagueProperty(){ return numVague; }
     public int getNumVague(){ return numVague.getValue(); }
 
     public void ajouterPoisson() {
-        double aleatoire = Math.random() ;
+        double aleatoire = Math.random();
+
         String typePoisson;
 
-        if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
+        if (aleatoire >= 0 && aleatoire < tauxSaumon) {
             typePoisson = "Saumon";
-        }
-        else if (aleatoire < tauxAlose){
+        } else if (aleatoire < tauxAlose) {
             typePoisson = "Alose";
-        }
-        else if (aleatoire < tauxLamproie ){
+        } else if (aleatoire < tauxLamproie) {
             typePoisson = "Lamproie";
-        }
-        else{
+        } else {
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.forgerPoisson(typePoisson);
 
-        compteurDelai = 0;
+
+            this.ForgePoisson.forgerPoisson(typePoisson);
+
+            compteurDelai = 0;
+
     }
 
     public void actionUnTour() {
@@ -87,27 +88,27 @@ public class Vague {
 
     }
 
-    public void incrementerLesTaux(double taux) {
-        if (tauxAlose - tauxSaumon >= 0)
-            tauxAlose -= tauxSaumon;
-        if (tauxLamproie - tauxSaumon >= 0)
-            tauxLamproie -= tauxSaumon;
-        if (tauxEsturgeon - tauxSaumon >= 0)
-            tauxEsturgeon  -= tauxSaumon;
+        public void incrementerLesTaux(double taux) {
+            if (tauxAlose - tauxSaumon >= 0)
+                tauxAlose -= tauxSaumon;
+            if (tauxLamproie - tauxSaumon >= 0)
+                tauxLamproie -= tauxSaumon;
+            if (tauxEsturgeon - tauxSaumon >= 0)
+                tauxEsturgeon  -= tauxSaumon;
 
-        tauxSaumon -= taux;
+            tauxSaumon -= taux;
 
-        double aleatoire = Math.random();
+            double aleatoire = Math.random();
 
-        if (aleatoire >= 0 && aleatoire < 0.35)
-            tauxAlose += taux;
-        else if (aleatoire < 0.70)
-            tauxLamproie += taux;
-        else
-            tauxEsturgeon += taux;
+            if (aleatoire >= 0 && aleatoire < 0.35)
+                tauxAlose += taux;
+            else if (aleatoire < 0.70)
+                tauxLamproie += taux;
+            else
+                tauxEsturgeon += taux;
 
-        calculerLesTaux();
-    }
+            calculerLesTaux();
+        }
 
     public void evolutionVague() {
             objectif = (int)(objectif * 1.2);
@@ -131,3 +132,5 @@ public class Vague {
 
 
 }
+
+
