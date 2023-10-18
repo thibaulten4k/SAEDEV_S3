@@ -1,8 +1,5 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-<<<<<<< HEAD
-public abstract class ForgePoisson {
-=======
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Archer;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
@@ -13,7 +10,6 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Lamproie;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Saumon;
 
 public class ForgePoisson {
->>>>>>> f7b501e40788cfeb904626a43bcf5da56c303996
     private int newX;
     private int newY;
 
@@ -22,13 +18,6 @@ public class ForgePoisson {
         newY = Environnement.getInstance().getParcours().get(0).getY() * Case.tailleCase + Case.tailleCase / 2;
     }
 
-<<<<<<< HEAD
-    public abstract Poisson creerPoissons(int x, int y);
-
-    public void forgerPoisson() {
-        Poisson p = creerPoissons(newX, newY);
-        Environnement.getInstance().ajouterAListePoisson(p);
-=======
     public Poisson forgerPoisson(String typePoisson) {
         Poisson p = new Alose(newX,newY);
 
@@ -51,7 +40,6 @@ public class ForgePoisson {
         }
         Environnement.getInstance().ajouterAListePoisson(p);
         return p;
->>>>>>> f7b501e40788cfeb904626a43bcf5da56c303996
 
     }
 
