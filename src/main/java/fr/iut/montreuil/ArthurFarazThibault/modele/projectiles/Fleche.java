@@ -13,7 +13,7 @@ public class Fleche extends Projectile {
     @Override
     public void attaquer() {
 
-        if (Environnement.getInstance().estPresent(getCible())) {
+        if (Environnement.getInstance().estEncoreEnvie(getCible())) {
 
             if (poissonToucher(getCible())) {
                 getCible().subirDegat(this.getDegat());

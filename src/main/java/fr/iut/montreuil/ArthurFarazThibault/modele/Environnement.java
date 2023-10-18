@@ -41,6 +41,10 @@ public class Environnement {
         this.nbPoissonsTue = new SimpleIntegerProperty(0);
     }
 
+    public void setVague() {
+        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180);
+    }
+
     public static Environnement getInstance() {
         if (uniqueInstance == null)
             uniqueInstance = new Environnement(15, 10);
@@ -48,12 +52,6 @@ public class Environnement {
         return uniqueInstance;
 
     }
-
-    public void setVague() {
-        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180);
-    }
-
-    //METHODES TERRAIN
 
     public void construire() {
         for (int col = 0; col < this.nbLignes; col++) {
@@ -64,6 +62,7 @@ public class Environnement {
 
     }
 
+    //salut c'est moi
     public void chargement(int[] carte) {
         int curseur = 0;
 
@@ -78,29 +77,6 @@ public class Environnement {
         this.parcours = chemin.trouverParcours();
     }
 
-    public int getNbColonnes() { return nbColonnes; }
-    public int getNbLignes() { return nbLignes; }
-    public Case[][] getTerrain() { return terrain; }
-    public double getPoidsCase(int x, int y) { return terrain[x][y].getPoids(); }
-    public ArrayList<Case> getParcours() { return this.parcours; }
-
-    //METHODE ARGENT (POTENTIELLEMENT POUR UN FUTUR JOUEUR)
-
-    public void recupArgent ( int argent ) {
-        this.setArgentPropertyValue(getArgentPropertyValue() + argent);
-        if ( this.getArgentPropertyValue() > argentMax )
-            setArgentPropertyValue(argentMax);
-
-    }
-
-    public IntegerProperty getArgentProperty() { return argentProperty; }
-
-    public int getArgentPropertyValue () { return argentProperty.getValue() ; }
-    public void setArgentPropertyValue(int argent) { this.argentProperty.setValue(argent) ; }
-
-
-    //METHODE PV (POTENTIELLEMENT POUR UN FUTUR JOUEUR)
-
     public void subirDegat(int degat) {
         if ( (pvProperty.getValue() - degat) >= 0 )
         pvProperty.setValue(pvProperty.getValue() - degat);
@@ -109,20 +85,33 @@ public class Environnement {
         }
 
     }
-    public int getPvPropertyValue() { return pvProperty.getValue(); }
-    public IntegerProperty getPvProperty() { return pvProperty; }
-
-    public void setPvPropertyValue(int pvProperty) { this.pvProperty.setValue(pvProperty); }
 
 
-    //GESTION DES VAGUES
 
     public Vague getVague(){
         return this.vague;
     }
+
+    public int getNbColonnes() { return nbColonnes; }
+    public int getNbLignes() { return nbLignes; }
+    public Case[][] getTerrain() { return terrain; }
+    public double getPoidsCase(int x, int y) { return terrain[x][y].getPoids(); }
+    public int getPvPropertyValue() { return pvProperty.getValue(); }
+    public IntegerProperty getPvProperty() { return pvProperty; }
+    public IntegerProperty getArgentProperty() { return argentProperty; }
+
+    public int getArgentPropertyValue () { return argentProperty.getValue() ; }
+    public void setArgentPropertyValue(int argent) { this.argentProperty.setValue(argent) ; }
+
+    public void setPvPropertyValue(int pvProperty) { this.pvProperty.setValue(pvProperty); }
+
+    public ObservableList<Poisson> getListePoissons() { return this.listePoissons; }
+    public ObservableList<Pecheur> getListePecheurs() { return this.listePecheurs; }
+    public ObservableList<Projectile> getListeProjectiles() { return this.listeProjectiles; }
+
     public IntegerProperty getNbPoissonsTue () { return this.nbPoissonsTue ; }
 
-    public boolean estPresent(Poisson cible) {
+    public boolean estEncoreEnvie (Poisson cible) {
         for (Poisson p : listePoissons) {
             if (p == cible)
                 return true;
@@ -131,23 +120,49 @@ public class Environnement {
 
     }
 
-    //GESTION D'AJOUTS A L'ENVIRONNEMENT
-
-
-    public ObservableList<Poisson> getListePoissons() { return this.listePoissons; }
-    public ObservableList<Pecheur> getListePecheurs() { return this.listePecheurs; }
-    public ObservableList<Projectile> getListeProjectiles() { return this.listeProjectiles; }
-
-
     public boolean caseOccupee(int x, int y) {
-        for (Pecheur pecheur : listePecheurs)
-            if (pecheur.getXpropertyValue() == x && pecheur.getYpropertyValue() == y)
+        for (Pecheur p : listePecheurs)
+            if (p.getXpropertyValue() == x && p.getYpropertyValue() == y)
                 return true;
 
         return false;
     }
 
+    public void faireUnTour() {
+        if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
 
+            for (Pecheur p : listePecheurs) {
+                p.actionUnTour();
+            }
+
+            for (int i = listeProjectiles.size() - 1; i >= 0; i--) {
+                Projectile p = listeProjectiles.get(i);
+                if (p.getDureeDeVie() <= 0) {
+                    listeProjectiles.remove(p);
+                } else {
+                    p.actionUnTour();
+                }
+
+            }
+
+            for (int i = listePoissons.size() - 1; i >= 0; i--) {
+                Poisson p = listePoissons.get(i);
+                if (p.getPv() <= 0) {
+                    recupArgent(p.getRecompense());
+                    listePoissons.remove(p);
+                    nbPoissonsTue.setValue(nbPoissonsTue.getValue() + 1);
+                    vague.incrementerCompteurObjectif();
+                } else {
+                    p.actionUnTour();
+                }
+
+            }
+
+            vague.actionUnTour();
+
+        }
+
+    }
 
     public void ajouterPecheur(Pecheur pecheur) {
         if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
@@ -159,7 +174,7 @@ public class Environnement {
         else if (pecheur.getCoût() > this.argentProperty.getValue()) {
             System.out.println("Erreur ! pas assez d'argent ! ");
         }
-        else {
+         else {
             this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCoût());
             this.listePecheurs.add(pecheur);
         }
@@ -168,60 +183,14 @@ public class Environnement {
 
     public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
 
+    public ArrayList<Case> getParcours() { return this.parcours; }
 
-
-    //METHODES GESTION D'UN TOUR
-
-    public void faireUnTour() {
-        if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
-
-            this.pecheursAgissent();
-            this.projectilesAgissent();
-            this.poissonsAgissent();
-            vague.actionUnTour();
-
-        }
+    public void recupArgent ( int argent ) {
+        this.setArgentPropertyValue(getArgentPropertyValue() + argent);
+        if ( this.getArgentPropertyValue() > argentMax )
+            setArgentPropertyValue(argentMax);
 
     }
-
-    public void pecheursAgissent(){
-        for (Pecheur pecheur : listePecheurs) {
-            pecheur.actionUnTour();
-        }
-    }
-
-    public void projectilesAgissent(){
-        for (int i = listeProjectiles.size() - 1; i >= 0; i--) {
-            Projectile projectile = listeProjectiles.get(i);
-            if (projectile.getDureeDeVie() <= 0) {
-                listeProjectiles.remove(projectile);
-            } else {
-                projectile.actionUnTour();
-            }
-
-        }
-    }
-
-    public void poissonsAgissent(){
-        for (int i = listePoissons.size() - 1; i >= 0; i--) {
-            Poisson poisson = listePoissons.get(i);
-            if (poisson.getPv() <= 0) {
-                recupArgent(poisson.getRecompense());
-                listePoissons.remove(poisson);
-                nbPoissonsTue.setValue(nbPoissonsTue.getValue() + 1);
-                vague.incrementerCompteurObjectif();
-            } else {
-                poisson.actionUnTour();
-            }
-
-        }
-    }
-
-
-
-
-
-
 
 }
 
