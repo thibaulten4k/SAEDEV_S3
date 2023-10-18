@@ -8,14 +8,14 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Fleche;
 
 public class Archer extends Pecheur {
 
-    public Archer(int x, int y, Environnement terrain) {
-        super(x, y, terrain, 30, 3, 150);
+    public Archer(int x, int y) {
+        super(x, y, 30, 3, 150);
     }
 
     @Override
     public void attaquer(Poisson p) {
-        Projectile proj = new Fleche(this.getXpropertyValue(), this.getYpropertyValue(), environnement, p);
-        environnement.getListeProjectiles().add(proj);
+        Projectile proj = new Fleche(this.getXpropertyValue(), this.getYpropertyValue(), p);
+        Environnement.getInstance().getListeProjectiles().add(proj);
     }
 
 }

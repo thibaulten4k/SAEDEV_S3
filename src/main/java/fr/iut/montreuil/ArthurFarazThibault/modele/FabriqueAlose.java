@@ -2,15 +2,14 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Alose;
+import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Saumon;
 
-public class FabriqueAlose extends FabriquePoisson {
-    public FabriqueAlose(Environnement terrain){
-        super(terrain);
-    }
+public class FabriqueAlose extends ForgePoisson {
+    public FabriqueAlose() { super(); }
 
     @Override
-    public Poisson creerPoissons( Environnement terrain) {
-        return new Alose(newX, newY, terrain);
-
+    public Poisson creerPoissons(int x, int y) {
+        return new Alose(x, y);
     }
+
 }

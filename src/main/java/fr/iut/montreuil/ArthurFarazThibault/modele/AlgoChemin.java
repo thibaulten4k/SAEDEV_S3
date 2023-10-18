@@ -45,7 +45,7 @@ public class AlgoChemin {
 
 
         }
-
+        System.out.println("J'ai trouvé un parcours !");
         return parcours ;
     }
 
