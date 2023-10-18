@@ -41,9 +41,7 @@ public class Environnement {
         this.nbPoissonsTue = new SimpleIntegerProperty(0);
     }
 
-    public void setVague() {
-        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180);
-    }
+    public void setVague() { this.vague = new Vague(5,  100, 0, 0, 0, 25, 180); }
 
     public static Environnement getInstance() {
         if (uniqueInstance == null)
