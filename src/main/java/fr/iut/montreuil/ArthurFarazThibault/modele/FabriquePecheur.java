@@ -5,9 +5,9 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Tremailleur;
 
-public class ForgePecheur {
+public class FabriquePecheur {
 
-    public static void creerPecheur (double x, double y, int typePecheur) {
+    public static void fabriquerPecheur(double x, double y, int typePecheur) {
 
         Environnement environnement = Environnement.getInstance();
 
