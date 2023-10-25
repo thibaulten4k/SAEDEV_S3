@@ -7,14 +7,11 @@ import java.util.LinkedList;
 
 public class Vague {
 
-    private FabriqueAlose fabAlose;
-    private FabriqueEsturgeon fabEstu;
-    private FabriqueSaumon fabSaum;
-    private FabriqueLamproie fabLamp;
-
     private double tauxSpawn;
 
     public IntegerProperty numVague;
+
+    private ForgePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
@@ -42,17 +39,10 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
+        this.ForgePoisson = new ForgePoisson();
 
-        fabAlose = new FabriqueAlose();
-        fabEstu = new FabriqueEsturgeon();
-        fabLamp = new FabriqueLamproie();
-        fabSaum = new FabriqueSaumon();
 
     }
-    public void fabriquerSaumon(){ fabSaum.forgerPoisson(); }
-    public void fabriquerAlose(){ fabAlose.forgerPoisson(); }
-    public void fabriquerLamproie(){ fabLamp.forgerPoisson(); }
-    public void fabriquerEsturgeon(){ fabEstu.forgerPoisson(); }
 
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }
     public IntegerProperty getNumVagueProperty(){ return numVague; }
@@ -60,19 +50,21 @@ public class Vague {
 
     public void ajouterPoisson() {
         double aleatoire = Math.random() ;
+        String typePoisson;
 
         if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
-            fabriquerSaumon();
+            typePoisson = "Saumon";
         }
         else if (aleatoire < tauxAlose){
-            fabriquerAlose();
+            typePoisson = "Alose";
         }
         else if (aleatoire < tauxLamproie ){
-            fabriquerLamproie();
+            typePoisson = "Lamproie";
         }
         else{
-            fabriquerEsturgeon();
+            typePoisson = "Esturgeon";
         }
+        this.ForgePoisson.forgerPoisson(typePoisson);
 
         compteurDelai = 0;
     }

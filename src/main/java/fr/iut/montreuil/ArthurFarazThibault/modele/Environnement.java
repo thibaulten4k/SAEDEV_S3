@@ -26,21 +26,22 @@ public class Environnement {
     private IntegerProperty nbPoissonsTue ;
 
     public Environnement(int largeur, int hauteur) {
-
         this.nbColonnes = largeur;
         this.nbLignes = hauteur;
 
         this.listePoissons = FXCollections.observableArrayList();
         this.listePecheurs = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
+
         this.terrain = new Case[hauteur][largeur];
         this.construire();
-        this.pvProperty =  new SimpleIntegerProperty(100) ;
-        this.argentProperty = new SimpleIntegerProperty(350) ;
+        this.pvProperty =  new SimpleIntegerProperty(100);
+        this.argentProperty = new SimpleIntegerProperty(350);
         this.argentMax = 2000;
-        this.vague = new Vague(5,  100, 0, 0, 0, 25, 180) ;
-        this.nbPoissonsTue = new SimpleIntegerProperty(0) ;
+        this.nbPoissonsTue = new SimpleIntegerProperty(0);
     }
+
+    public void setVague() { this.vague = new Vague(5,  100, 0, 0, 0, 25, 180); }
 
     public static Environnement getInstance() {
         /*if (uniqueInstance == null)
@@ -51,17 +52,16 @@ public class Environnement {
     }
 
     public void construire() {
-
         for (int col = 0; col < this.nbLignes; col++) {
             for (int lig = 0; lig < this.nbColonnes; lig++) {
                 this.terrain[col][lig] = new Case(col, lig, 1);
             }
         }
+
     }
 
     //salut c'est moi
     public void chargement(int[] carte) {
-
         int curseur = 0;
 
         for (int col = 0; col < this.nbLignes; col++) {
@@ -72,12 +72,10 @@ public class Environnement {
         }
 
         AlgoChemin chemin = new AlgoChemin(this);
-        parcours = chemin.trouverParcours();
-
+        this.parcours = chemin.trouverParcours();
     }
 
     public void subirDegat(int degat) {
-
         if ( (pvProperty.getValue() - degat) >= 0 )
         pvProperty.setValue(pvProperty.getValue() - degat);
         else {
@@ -86,16 +84,11 @@ public class Environnement {
 
     }
 
-    public Case getCase(int x, int y) {
-        if (x < 0 || x >= nbLignes || y < 0 || y >= nbColonnes)
-            return null;
-        else
-            return terrain[x][y];
-    }
+
 
     public Vague getVague(){
         return this.vague;
-}
+    }
 
     public int getNbColonnes() { return nbColonnes; }
     public int getNbLignes() { return nbLignes; }
@@ -122,6 +115,7 @@ public class Environnement {
                 return true;
         }
         return false;
+
     }
 
     public boolean caseOccupee(int x, int y) {
@@ -132,31 +126,7 @@ public class Environnement {
         return false;
     }
 
-    public Case getAdjacent (Case traite, ArrayList<Case> parcours ) {
-
-        Case testé;
-        int[] modif = {1, -1};
-
-        //Ici c'est les X
-        for (int i = 0; i < modif.length; i++) {
-            testé = this.getCase(traite.getY() + modif[i], traite.getX());
-
-            if (testé != null && testé.getPoids() == 0 && !parcours.contains(testé))
-                return testé;
-        }
-
-        //Ici c'est les Y
-        for (int i = 0; i < modif.length; i++) {
-            testé = this.getCase(traite.getY(), traite.getX() + modif[i]);
-
-            if ( testé != null && testé.getPoids() == 0 && ! parcours.contains(testé) )
-                return testé ;
-        }
-        return null;
-    }
-
     public void faireUnTour() {
-
         if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
 
             for (Pecheur p : listePecheurs) {
@@ -193,7 +163,6 @@ public class Environnement {
     }
 
     public void ajouterPecheur(Pecheur pecheur) {
-
         if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
             System.out.println("Il y a un obstacle sur cette case !");
         }
@@ -207,6 +176,7 @@ public class Environnement {
             this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCoût());
             this.listePecheurs.add(pecheur);
         }
+
     }
 
     public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
@@ -214,9 +184,10 @@ public class Environnement {
     public ArrayList<Case> getParcours() { return this.parcours; }
 
     public void recupArgent ( int argent ) {
-        this.setArgentPropertyValue(getArgentPropertyValue() + argent );
+        this.setArgentPropertyValue(getArgentPropertyValue() + argent);
         if ( this.getArgentPropertyValue() > argentMax )
             setArgentPropertyValue(argentMax);
+
     }
 
 }

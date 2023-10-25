@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SAEDEV S3" target="19" />
+      <module name="SAEDEV S3" target="18" />
     </bytecodeTargetLevel>
   </component>
 </project>

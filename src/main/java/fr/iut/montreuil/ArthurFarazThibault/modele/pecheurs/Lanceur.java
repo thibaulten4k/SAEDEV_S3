@@ -3,6 +3,7 @@ package fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.SuivreParcours;
 
 public class Lanceur extends Pecheur {
 
@@ -12,7 +13,7 @@ public class Lanceur extends Pecheur {
 
     @Override
     public void attaquer(Poisson p) {
-        p.setIndiceParcours(0);
-        p.setCompteur(0);
+        ((SuivreParcours)(p.getComportement())).setIndiceParcours(0);
+        ((SuivreParcours)(p.getComportement())).setCompteur(0);
     }
 }

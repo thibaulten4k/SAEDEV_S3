@@ -1,32 +1,21 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-public class Poisson extends Acteur{
+import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.SuivreParcours;
 
-    private int vitesse;
+public class Poisson extends ActeurMobile {
+
     private int pv;
     private int recompense;
-    private int degat;
 
-    private int indiceParcours;
-    private int compteur;
-
-    // Ici c'est 12 car le cercle est construit en partant du millieu
     public Poisson(int x, int y, int vitesse, int pv, int recompense, int degat) {
-        super(Environnement.getInstance().getParcours().get(0).getX(),
-                Environnement.getInstance().getParcours().get(0).getY());
+        super(x, y, vitesse, degat);
 
-        this.vitesse = vitesse;
         this.pv = pv;
-        this.indiceParcours = 0;
-        this.compteur = 0;
-        this.recompense = recompense ;
-        this.degat = degat;
+        this.recompense = recompense;
+        this.setComportement(new SuivreParcours(this));
     }
 
     public int getPv() { return this.pv; }
-
-    public void setIndiceParcours(int indice) { indiceParcours = indice; }
-
     public int getRecompense() { return recompense ; }
     public void setRecompense(int nouvelleRecompense) { recompense = nouvelleRecompense; }
 
@@ -35,49 +24,20 @@ public class Poisson extends Acteur{
         this.pv += -degat;
     }
 
-    public void setVitesse(int vitesse){this.vitesse=vitesse;}
-    public void setCompteur(int compteur) { this.compteur = compteur; }
-
 
     public void actionUnTour() {
-        Environnement environnement = Environnement.getInstance();
-
-        if (indiceParcours >= environnement.getParcours().size() -1) {
-            environnement.setPvPropertyValue(environnement.getPvPropertyValue() - 5);
-            this.setPv(0);
-            this.setRecompense(0);
-            environnement.subirDegat(degat);
-        } else {
-            Case caseActuel = environnement.getParcours().get(indiceParcours);
-            Case caseSuivante = environnement.getParcours().get(indiceParcours + 1);
-
-            if (caseActuel.getX() < caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() + vitesse);
-            }
-            if (caseActuel.getX() > caseSuivante.getX()) {
-                setXpropertyValue(getXpropertyValue() - vitesse);
-            }
-            if (caseActuel.getY() < caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() + vitesse);
-            }
-            if (caseActuel.getY() > caseSuivante.getY()) {
-                setYpropertyValue(getYpropertyValue() - vitesse);
-            }
-            compteur  = compteur + vitesse;
-        }
-
-        if (compteur >= Case.tailleCase) {
-            indiceParcours++;
-            compteur = 0;
-            setXpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getX());
-            setYpropertyValue((Case.tailleCase/2) + Case.tailleCase * environnement.getParcours().get(indiceParcours).getY());
-        }
-
+        comportement.seDeplace();
+        if(comportement.estSortieDuTerrain())
+            this.meurt();
     }
 
-    public int getVitesse() {
-        return vitesse;
+    public void meurt(){
+        Environnement.getInstance().setPvPropertyValue(Environnement.getInstance().getPvPropertyValue() - 5);
+        this.setPv(0);
+        this.setRecompense(recompense/2);
+        Environnement.getInstance().subirDegat(degat);
     }
+
 
     public String toString() { return "Poisson : " + this.id; }
 

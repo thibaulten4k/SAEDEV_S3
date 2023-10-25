@@ -114,9 +114,10 @@ public class Controlleur implements Initializable {
 
         creerSpritesBoutonsRadio();
 
-        this.environnement = new Environnement(15,10);
+        this.environnement = Environnement.getInstance();
 
         this.environnement.chargement(niveau2);
+        this.environnement.setVague();
         vueTerrain vue = new vueTerrain(environnement, vueMap, Case.tailleCase);
 
         this.environnement.getListePoissons().addListener(new ObservateurListePoissons(this.vueMap));
