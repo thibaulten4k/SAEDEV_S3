@@ -1,16 +1,16 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele.projectiles;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Effet;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
+import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Affaiblissement;
 import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Ralentissement;
 
-public class Filet extends Projectile {
+public class FlecheEmpoisonee extends Projectile {
 
-    public Filet (int x, int y, Poisson poisson) {
-        super(x, y, 12, 5, 16, 45, 15, poisson, new Ralentissement());
+    public FlecheEmpoisonee (int x, int y, Poisson poisson) {
+        super(x, y, 10, 3, 12, 30, 30, poisson, new Affaiblissement());
         this.setComportement(new LigneDroite(this, poisson));
     }
 
