@@ -48,7 +48,8 @@ public abstract class Projectile extends ActeurMobile {
         for (Poisson p : Environnement.getInstance().getListePoissons()) {
             if (poissonToucher(p)) {
                 p.subirDegat(this.getDegat());
-                effet.appliquerEffet(p);
+                if(effet != null)
+                    effet.appliquerEffet(p);
                 this.soustraireDureeDeVie(-degatColison);
             }
         }

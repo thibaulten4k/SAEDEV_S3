@@ -3,7 +3,6 @@ package fr.iut.montreuil.ArthurFarazThibault.modele.projectiles;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.TeteChercheuse;
-import fr.iut.montreuil.ArthurFarazThibault.modele.effet.AucunEffet;
 
 public class Chien extends Projectile {
 
