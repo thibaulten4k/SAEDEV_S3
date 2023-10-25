@@ -13,4 +13,6 @@ module com.example.towerdefense_sprint1 {
     opens fr.iut.montreuil.ArthurFarazThibault.controlleur to javafx.fxml;
     exports fr.iut.montreuil.ArthurFarazThibault.modele;
     opens fr.iut.montreuil.ArthurFarazThibault.modele to javafx.fxml;
+    exports fr.iut.montreuil.ArthurFarazThibault.modele.bonus;
+    opens fr.iut.montreuil.ArthurFarazThibault.modele.bonus to javafx.fxml;
 }

@@ -38,7 +38,6 @@ public class Poisson extends ActeurMobile {
         Environnement.getInstance().subirDegat(degat);
     }
 
-
     public String toString() { return "Poisson : " + this.id; }
 
 }
