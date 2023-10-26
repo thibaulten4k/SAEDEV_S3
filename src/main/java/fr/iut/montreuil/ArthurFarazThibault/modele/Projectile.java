@@ -4,11 +4,11 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
 
 public abstract class Projectile extends ActeurMobile {
 
-    private int taille;
-    private int dureeDeVie;
-    private int degatColison;
+    protected int taille;
+    protected int dureeDeVie;
+    protected int degatColison;
     protected Poisson cible;
-    private Effet effet;
+    protected Effet effet;
 
     public Projectile(int x, int y, int vitesse, int degat, int taille, int dureeDeVie, int degatColision, Poisson cible, Effet effet) {
         super(x, y, vitesse, degat);
@@ -22,6 +22,8 @@ public abstract class Projectile extends ActeurMobile {
     }
 
     public int getDureeDeVie() { return dureeDeVie; }
+    public void setDureeDeVie(int dureeDeVie) { this.dureeDeVie = dureeDeVie; }
+
     public void soustraireDureeDeVie(int mallus) {
         dureeDeVie += mallus;
 
