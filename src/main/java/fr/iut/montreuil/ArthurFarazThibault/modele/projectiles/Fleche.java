@@ -7,10 +7,10 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 public class Fleche extends Projectile {
 
     public Fleche (int x, int y, Poisson p) {
-        super(x, y, 16, 7, 12, 50, p);
+        super(x, y, 16, 7, 12, 50, 0, p ,null);
     }
 
-    @Override
+  /*  @Override
     public void attaquer() {
 
         if (Environnement.getInstance().estPresent(getCible())) {
@@ -21,5 +21,5 @@ public class Fleche extends Projectile {
             }
 
         }
-    }
+    }*/
 }
