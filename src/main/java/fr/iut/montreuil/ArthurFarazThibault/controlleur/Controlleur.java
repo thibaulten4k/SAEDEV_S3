@@ -51,6 +51,8 @@ public class Controlleur implements Initializable {
     @FXML
     private RadioButton selectionnerTremailleur;
     @FXML
+    private RadioButton selectionnerPunkAChien;
+    @FXML
     private ToggleGroup groupeRadio;
     @FXML
     private Label affichagePv ;
@@ -124,9 +126,6 @@ public class Controlleur implements Initializable {
         this.environnement.getListePecheurs().addListener(new ObservateurListePecheurs(this.vueMap));
         this.environnement.getListeProjectiles().addListener(new ObservateurListeProjectiles(this.vueMap));
 
-        //this.environnement.getPvProperty().addListener((obs, old, newValue) -> affichagePv.setText(newValue.toString()));
-        //this.environnement.getArgentProperty().addListener( (obs, old, newValue ) -> affichageArgent.setText(newValue.toString()) );
-
         this.affichagePv.textProperty().bind(this.environnement.getPvProperty().asString());
         this.affichageArgent.textProperty().bind(this.environnement.getArgentProperty().asString());
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
@@ -146,6 +145,7 @@ public class Controlleur implements Initializable {
         Image archer_carte = new Image((getClass().getResource( "/archer_carte.png").toExternalForm()));
         Image lanceur_carte = new Image((getClass().getResource( "/lanceur_carte.png").toExternalForm()));
         Image tremailleur_carte = new Image((getClass().getResource( "/tremailleur_carte.png").toExternalForm()));
+        Image punkAChien_carte = new Image((getClass().getResource( "/punkAChien_carte.png").toExternalForm()));
 
         ImageView harponneur = new ImageView(harponneur_carte);
         selectionnerHarponneur.setGraphic(harponneur);
@@ -158,6 +158,9 @@ public class Controlleur implements Initializable {
 
         ImageView tremailleur = new ImageView(tremailleur_carte);
         selectionnerTremailleur.setGraphic(tremailleur);
+
+        ImageView punkAChien = new ImageView(punkAChien_carte);
+        selectionnerPunkAChien.setGraphic(punkAChien);
     }
 
     @FXML
@@ -171,8 +174,10 @@ public class Controlleur implements Initializable {
         else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
             ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
         }
-        else {
+        else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
             ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+        } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
         }
 
     }

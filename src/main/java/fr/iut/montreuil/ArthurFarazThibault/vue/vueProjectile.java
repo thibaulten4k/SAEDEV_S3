@@ -1,37 +1,43 @@
 package fr.iut.montreuil.ArthurFarazThibault.vue;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Filet;
 import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Fleche;
 import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Harpon;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class vueProjectile {
 
     public static void creerSprite (Projectile p, Pane vueMap) {
 
-        Circle c;
+        Shape forme;
 
         if (p instanceof Harpon) {
-            c= new Circle(6);
-            c . setFill (Color.YELLOW);
+            forme= new Circle(6);
+            forme . setFill (Color.YELLOW);
         }
         else if (p instanceof Fleche) {
-            c= new Circle(4);
-            c . setFill (Color.BROWN);
+            forme= new Circle(4);
+            forme . setFill (Color.BROWN);
         }
-        else {
-            c= new Circle(8);
-            c . setFill (Color.GRAY);
+        else if (p instanceof Filet){
+            forme= new Circle(8);
+            forme . setFill (Color.GRAY);
+        } else {
+            forme = new Rectangle(12, 12);
+            forme . setFill(Color.ROSYBROWN);
         }
 
 
-        c.setId(p.getId());
+        forme.setId(p.getId());
 
         // c .setOnMouseClicked(e−> System.out.println("clic sur acteur"+ e.getSource()));
-        c.translateXProperty().bind(p.getXproperty());
-        c.translateYProperty().bind(p.getYproperty());
-        vueMap.getChildren().add(c);
+        forme.translateXProperty().bind(p.getXproperty());
+        forme.translateYProperty().bind(p.getYproperty());
+        vueMap.getChildren().add(forme);
     }
 }

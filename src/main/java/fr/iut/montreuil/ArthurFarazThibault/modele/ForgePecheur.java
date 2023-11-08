@@ -1,9 +1,6 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Archer;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Tremailleur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.*;
 
 public class ForgePecheur {
 
@@ -34,6 +31,11 @@ public class ForgePecheur {
             case 4:
                 pecheur = new Tremailleur(newX, newY);
                 environnement.ajouterPecheur(pecheur);
+                break;
+            case 5:
+                pecheur = new PunkAChien(newX, newY);
+                environnement.ajouterPecheur(pecheur);
+                break;
         }
 
     }
