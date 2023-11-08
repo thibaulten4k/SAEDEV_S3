@@ -13,8 +13,8 @@ public class Harponneur extends Pecheur {  // la légende raconte que le harpon 
     }
 
     @Override
-    public void attaquer(Poisson p) {
-        Projectile proj = new Harpon(this.getXpropertyValue(), this.getYpropertyValue(), p);
-        Environnement.getInstance().getListeProjectiles().add(proj);
+    public Projectile creerProjectile(int x, int y, Poisson cible) {
+        return new Harpon(x, y, cible);
     }
+
 }

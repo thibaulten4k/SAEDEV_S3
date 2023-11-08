@@ -3,7 +3,9 @@ package fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.SuivreParcours;
+import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Poing;
 
 public class Lanceur extends Pecheur {
 
@@ -12,8 +14,8 @@ public class Lanceur extends Pecheur {
     }
 
     @Override
-    public void attaquer(Poisson p) {
-        ((SuivreParcours)(p.getComportement())).setIndiceParcours(0);
-        ((SuivreParcours)(p.getComportement())).setCompteur(0);
+    public Projectile creerProjectile(int x, int y, Poisson cible) {
+        return new Poing(x, y, cible);
     }
+
 }

@@ -1,24 +1,17 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele.projectiles;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
+import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
+import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Ralentissement;
 
 public class Filet extends Projectile {
-    public Filet (int x, int y, Poisson p) {
-        super(x, y, 12, 5, 16, 100, p);
-    }
 
-    @Override
-    public void attaquer() {
-
-        for (Poisson p : Environnement.getInstance().getListePoissons()) {
-            if (poissonToucher(p)) {
-                p.subirDegat(this.getDegat());
-                p.setVitesse(p.getVitesse() - (p.getVitesse() / 2) );
-                soustraireDureeDeVie(getDureeDeVie());
-            }
-        }
+    public Filet (int x, int y, Poisson poisson) {
+        super(x, y, 12, 5, 16, 45, 15, poisson, new Ralentissement());
+        this.setComportement(new LigneDroite(this, poisson));
     }
 
 }

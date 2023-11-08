@@ -13,9 +13,8 @@ public class Archer extends Pecheur {
     }
 
     @Override
-    public void attaquer(Poisson p) {
-        Projectile proj = new Fleche(this.getXpropertyValue(), this.getYpropertyValue(), p);
-        Environnement.getInstance().getListeProjectiles().add(proj);
+    public Projectile creerProjectile(int x, int y, Poisson cible) {
+        return new Fleche(x, y, cible);
     }
 
 }
