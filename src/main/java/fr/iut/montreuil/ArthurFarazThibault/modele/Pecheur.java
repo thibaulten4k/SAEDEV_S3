@@ -14,7 +14,7 @@ public abstract class Pecheur extends Acteur{
         this.delai = delai;
         this.portee = portee;
         this.compteurDelai = 0;
-        this.coût = coût ;
+        this.coût = coût;
     }
 
     public int getCoût() { return coût; }
