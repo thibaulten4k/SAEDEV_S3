@@ -5,36 +5,33 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Tremailleur;
 
-public class ForgePecheur {
+public class FabriquePecheur {
 
-    public static void creerPecheur (double x, double y, int typePecheur) {
+    public static void fabriquerPecheur(double x, double y, int typePecheur) {
 
         Environnement environnement = Environnement.getInstance();
 
         int newX = (int)(x / Case.tailleCase) * Case.tailleCase + Case.tailleCase/2;
         int newY = (int)(y / Case.tailleCase) * Case.tailleCase + Case.tailleCase/2;
-        Pecheur pecheur;
+        Pecheur pecheur = null;
 
         switch (typePecheur) {
             case 1:
                 pecheur = new Harponneur(newX , newY);
-                environnement.ajouterPecheur(pecheur);
                 break;
 
             case 2:
                 pecheur = new Lanceur(newX, newY);
-                environnement.ajouterPecheur(pecheur);
                 break;
 
             case 3:
                 pecheur = new Archer(newX, newY);
-                environnement.ajouterPecheur(pecheur);
                 break;
 
             case 4:
                 pecheur = new Tremailleur(newX, newY);
-                environnement.ajouterPecheur(pecheur);
         }
+        environnement.ajouterPecheur(pecheur);
 
     }
 

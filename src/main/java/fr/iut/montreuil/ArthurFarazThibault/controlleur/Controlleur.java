@@ -2,7 +2,7 @@ package fr.iut.montreuil.ArthurFarazThibault.controlleur;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
-import fr.iut.montreuil.ArthurFarazThibault.modele.ForgePecheur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.FabriquePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
 import javafx.event.ActionEvent;
@@ -163,16 +163,16 @@ public class Controlleur implements Initializable {
     @FXML
     public void placerPecheur(MouseEvent event) {
         if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
+            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 1);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
+            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 2);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
+            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 3);
         }
         else {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 4);
         }
 
     }
