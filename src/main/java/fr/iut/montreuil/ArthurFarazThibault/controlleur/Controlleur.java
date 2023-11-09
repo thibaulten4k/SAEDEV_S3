@@ -2,7 +2,7 @@ package fr.iut.montreuil.ArthurFarazThibault.controlleur;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
-import fr.iut.montreuil.ArthurFarazThibault.modele.FabriquePecheur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.ForgePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
 import javafx.event.ActionEvent;
@@ -50,6 +50,8 @@ public class Controlleur implements Initializable {
     private RadioButton selectionnerArcher;
     @FXML
     private RadioButton selectionnerTremailleur;
+    @FXML
+    private RadioButton selectionnerPunkAChien;
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
@@ -124,9 +126,6 @@ public class Controlleur implements Initializable {
         this.environnement.getListePecheurs().addListener(new ObservateurListePecheurs(this.vueMap));
         this.environnement.getListeProjectiles().addListener(new ObservateurListeProjectiles(this.vueMap));
 
-        //this.environnement.getPvProperty().addListener((obs, old, newValue) -> affichagePv.setText(newValue.toString()));
-        //this.environnement.getArgentProperty().addListener( (obs, old, newValue ) -> affichageArgent.setText(newValue.toString()) );
-
         this.affichagePv.textProperty().bind(this.environnement.getPvProperty().asString());
         this.affichageArgent.textProperty().bind(this.environnement.getArgentProperty().asString());
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
@@ -146,6 +145,7 @@ public class Controlleur implements Initializable {
         Image archer_carte = new Image((getClass().getResource( "/archer_carte.png").toExternalForm()));
         Image lanceur_carte = new Image((getClass().getResource( "/lanceur_carte.png").toExternalForm()));
         Image tremailleur_carte = new Image((getClass().getResource( "/tremailleur_carte.png").toExternalForm()));
+        Image punkAChien_carte = new Image((getClass().getResource( "/punkAChien_carte.png").toExternalForm()));
 
         ImageView harponneur = new ImageView(harponneur_carte);
         selectionnerHarponneur.setGraphic(harponneur);
@@ -158,21 +158,26 @@ public class Controlleur implements Initializable {
 
         ImageView tremailleur = new ImageView(tremailleur_carte);
         selectionnerTremailleur.setGraphic(tremailleur);
+
+        ImageView punkAChien = new ImageView(punkAChien_carte);
+        selectionnerPunkAChien.setGraphic(punkAChien);
     }
 
     @FXML
     public void placerPecheur(MouseEvent event) {
         if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 1);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 2);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
         }
         else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 3);
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
         }
-        else {
-            FabriquePecheur.fabriquerPecheur(event.getX(), event.getY(), 4);
+        else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+        } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
+            ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
         }
 
     }

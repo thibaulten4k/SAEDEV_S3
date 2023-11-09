@@ -31,8 +31,7 @@ public class Poisson extends ActeurMobile {
             this.meurt();
     }
 
-    public void meurt(){
-        Environnement.getInstance().setPvPropertyValue(Environnement.getInstance().getPvPropertyValue() - 5);
+    public void meurt() {
         this.setPv(0);
         this.setRecompense(recompense/2);
         Environnement.getInstance().subirDegat(degat);

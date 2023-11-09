@@ -8,7 +8,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Chien;
 public class PunkAChien extends Pecheur {
 
     public PunkAChien(int x, int y) {
-        super(x, y, 160, 3, 250);
+        super(x, y, 120, 5, 250);
     }
 
     @Override
