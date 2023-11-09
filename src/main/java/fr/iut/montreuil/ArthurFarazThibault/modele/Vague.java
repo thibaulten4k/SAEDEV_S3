@@ -3,15 +3,13 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.LinkedList;
-
 public class Vague {
 
     private double tauxSpawn;
 
     public IntegerProperty numVague;
 
-    private ForgePoisson ForgePoisson;
+    private FabriquePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
@@ -39,7 +37,7 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
-        this.ForgePoisson = new ForgePoisson();
+        this.ForgePoisson = new FabriquePoisson();
 
 
     }
@@ -64,7 +62,7 @@ public class Vague {
         else{
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.forgerPoisson(typePoisson);
+        this.ForgePoisson.fabriquerPoisson(typePoisson);
 
         compteurDelai = 0;
     }
