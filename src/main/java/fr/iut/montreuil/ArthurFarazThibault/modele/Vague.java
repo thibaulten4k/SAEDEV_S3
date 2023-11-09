@@ -9,7 +9,7 @@ public class Vague {
 
     public IntegerProperty numVague;
 
-    private FabriquePoisson ForgePoisson;
+    private fr.iut.montreuil.ArthurFarazThibault.modele.ForgePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
@@ -37,7 +37,7 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
-        this.ForgePoisson = new FabriquePoisson();
+        this.ForgePoisson = new ForgePoisson();
 
 
     }

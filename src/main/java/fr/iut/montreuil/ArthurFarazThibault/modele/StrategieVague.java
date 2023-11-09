@@ -7,7 +7,7 @@ public abstract class StrategieVague {
     public IntegerProperty numVague;  // numéro de la vague actuelle
     private double tauxSpawn;   // taux de spwan générale (augmente à chaque vague)
 
-    private FabriquePoisson ForgePoisson;  // créer des poissons
+    private fr.iut.montreuil.ArthurFarazThibault.modele.ForgePoisson ForgePoisson;  // créer des poissons
 
     private double tauxSaumon ;  // probabilité d'apparition des poissons
     private double tauxAlose ;
