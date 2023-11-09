@@ -43,7 +43,7 @@ public class TeteChercheuse extends ComportementDeplacement{
         acteur.setYpropertyValue((int)(acteur.getYpropertyValue() + coefY/magnitude * acteur.getVitesse()));
         indice += acteur.getVitesse();
 
-        if(indice > (distance/2)) {
+        if(indice > (distance/2) && cible.getPv() > 0) {
             distance = distance/2;
             indice = 0;
             this.reactualisePositionCible();

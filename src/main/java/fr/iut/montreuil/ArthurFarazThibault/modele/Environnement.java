@@ -21,8 +21,8 @@ public class Environnement {
     private ObservableList<Projectile> listeProjectiles;
     private IntegerProperty argentProperty;
     private IntegerProperty pvProperty;
-    private int argentMax ;
-    private Vague vague ;
+    private int argentMax;
+    private Vague vague;
     private IntegerProperty nbPoissonsTue ;
 
     public Environnement(int largeur, int hauteur) {
@@ -39,6 +39,7 @@ public class Environnement {
         this.argentProperty = new SimpleIntegerProperty(350);
         this.argentMax = 2000;
         this.nbPoissonsTue = new SimpleIntegerProperty(0);
+
     }
 
     public void setVague() { this.vague = new Vague(5,  100, 0, 0, 0, 25, 180); }

@@ -4,9 +4,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Harpon;
 
 public abstract class Pecheur extends Acteur{
 
-    private int delai;
-    private int portee;
-    private int coût ;
+    private int delai, portee, coût;
 
     private int compteurDelai;
 
