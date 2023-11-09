@@ -62,7 +62,7 @@ public class Vague {
         else{
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.fabriquerPoisson(typePoisson);
+        this.ForgePoisson.forgerPoisson(typePoisson);
 
         compteurDelai = 0;
     }

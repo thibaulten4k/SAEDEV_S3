@@ -41,7 +41,7 @@ public abstract class StrategieVague {
         else{
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.fabriquerPoisson(typePoisson) ;
+        this.ForgePoisson.forgerPoisson(typePoisson) ;
 
         compteurDelai = 0;
     }
