@@ -4,9 +4,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Harpon;
 
 public abstract class Pecheur extends Acteur{
 
-    private int delai;
-    private int portee;
-    private int coût ;
+    private int delai, portee, coût;
 
     private int compteurDelai;
 
@@ -16,7 +14,7 @@ public abstract class Pecheur extends Acteur{
         this.delai = delai;
         this.portee = portee;
         this.compteurDelai = 0;
-        this.coût = coût ;
+        this.coût = coût;
     }
 
     public int getCoût() { return coût; }
@@ -39,6 +37,7 @@ public abstract class Pecheur extends Acteur{
         }
         else {
             compteurDelai++;
+
         }
 
     }
