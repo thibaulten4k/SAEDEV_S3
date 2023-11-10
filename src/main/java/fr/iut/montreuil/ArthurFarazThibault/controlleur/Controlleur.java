@@ -70,16 +70,16 @@ public class Controlleur implements Initializable {
 
     private double frameRate = 0.017;
 
-    int[] niveau1 = {3, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    int[] niveau1 = {1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
             1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-            1, 0, 0, 0, 0, 0, 1, 0, 1, 2, 2, 1, 0, 1, 1,
-            1, 1, 1, 1, 1, 0, 1, 0, 1, 2, 2, 1, 0, 1, 1,
-            2, 1, 1, 1, 1, 0, 0, 0, 1, 2, 2, 1, 0, 1, 1,
-            2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 0, 1, 1,
-            2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 0, 1, 1,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1};
+            1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1};
 
     int[] niveau2 = {2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 3,
             2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 0, 0, 0, 1, 1,
@@ -110,27 +110,27 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
         this.pause = true;
 
         creerSpritesBoutonsRadio();
 
         this.environnement = Environnement.getInstance();
 
-        this.environnement.chargement(niveau2);
+        this.environnement.chargementTerrain(niveau1);
         this.environnement.setVague();
         vueTerrain vue = new vueTerrain(environnement, vueMap, Case.tailleCase);
 
         this.environnement.getListePoissons().addListener(new ObservateurListePoissons(this.vueMap));
         this.environnement.getListePecheurs().addListener(new ObservateurListePecheurs(this.vueMap));
         this.environnement.getListeProjectiles().addListener(new ObservateurListeProjectiles(this.vueMap));
+        this.environnement.getListeObstacles().addListener(new ObservateurListeObstacles(this.vueMap));
 
         this.affichagePv.textProperty().bind(this.environnement.getPvProperty().asString());
         this.affichageArgent.textProperty().bind(this.environnement.getArgentProperty().asString());
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
         this.AffichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
 
+        this.environnement.generationObstacles();
 
         initAnimation();
         //demarre l'animation

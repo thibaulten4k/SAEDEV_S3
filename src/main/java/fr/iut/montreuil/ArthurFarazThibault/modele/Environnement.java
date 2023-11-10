@@ -1,5 +1,7 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.obstacles.Buisson;
+import fr.iut.montreuil.ArthurFarazThibault.modele.obstacles.Rocher;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -16,9 +18,12 @@ public class Environnement {
     
     private Case[][] terrain;
     private ArrayList<Case> parcours;
+
     private ObservableList<Poisson> listePoissons;
     private ObservableList<Pecheur> listePecheurs;
     private ObservableList<Projectile> listeProjectiles;
+    private ObservableList<Obstacle> listeObstacles;
+
     private IntegerProperty argentProperty;
     private IntegerProperty pvProperty;
     private int argentMax;
@@ -32,6 +37,7 @@ public class Environnement {
         this.listePoissons = FXCollections.observableArrayList();
         this.listePecheurs = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
+        this.listeObstacles = FXCollections.observableArrayList();
 
         this.terrain = new Case[hauteur][largeur];
         this.construire();
@@ -62,7 +68,7 @@ public class Environnement {
     }
 
     //salut c'est moi
-    public void chargement(int[] carte) {
+    public void chargementTerrain(int[] carte) {
         int curseur = 0;
 
         for (int col = 0; col < this.nbLignes; col++) {
@@ -74,6 +80,28 @@ public class Environnement {
 
         AlgoChemin chemin = new AlgoChemin(this);
         this.parcours = chemin.trouverParcours();
+    }
+
+    public void generationObstacles() {
+        double tauxBuisson = 0.20;
+        double tauxRocher = 0.30;
+        double random;
+
+        for (int col = 0; col < this.nbLignes; col++) {
+            for (int lig = 0; lig < this.nbColonnes; lig++) {
+                if(Environnement.getInstance().getPoidsCase(col, lig) != 0) {
+                    random = Math.random();
+                    if (random <= tauxBuisson) {
+                        Environnement.getInstance().ajouterObstacle(new Buisson( ((lig * 32) + 16), ((col * 32) + 16) ));
+                    } else if (random <= tauxRocher) {
+                        Environnement.getInstance().ajouterObstacle(new Rocher( ((lig * 32) + 16), ((col * 32) + 16) ));
+                    }
+                }
+
+
+            }
+        }
+
     }
 
     public void subirDegat(int degat) {
@@ -107,6 +135,7 @@ public class Environnement {
     public ObservableList<Poisson> getListePoissons() { return this.listePoissons; }
     public ObservableList<Pecheur> getListePecheurs() { return this.listePecheurs; }
     public ObservableList<Projectile> getListeProjectiles() { return this.listeProjectiles; }
+    public ObservableList<Obstacle> getListeObstacles() { return this.listeObstacles; }
 
     public IntegerProperty getNbPoissonsTue () { return this.nbPoissonsTue ; }
 
@@ -122,6 +151,10 @@ public class Environnement {
     public boolean caseOccupee(int x, int y) {
         for (Pecheur p : listePecheurs)
             if (p.getXpropertyValue() == x && p.getYpropertyValue() == y)
+                return true;
+
+        for (Obstacle o : listeObstacles)
+            if(o.getXpropertyValue() == x && o.getYpropertyValue() == y)
                 return true;
 
         return false;
@@ -178,6 +211,10 @@ public class Environnement {
             this.listePecheurs.add(pecheur);
         }
 
+    }
+
+    public void ajouterObstacle(Obstacle obstacle) {
+        this.listeObstacles.add(obstacle);
     }
 
     public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
