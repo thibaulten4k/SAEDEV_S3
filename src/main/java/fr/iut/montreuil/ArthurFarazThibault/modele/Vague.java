@@ -9,7 +9,7 @@ public class Vague {
 
     public IntegerProperty numVague;
 
-    private FabriquePoisson ForgePoisson;
+    private fr.iut.montreuil.ArthurFarazThibault.modele.ForgePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
@@ -37,7 +37,7 @@ public class Vague {
 
         this.delai = delai;
         this.compteurDelai = delai;
-        this.ForgePoisson = new FabriquePoisson();
+        this.ForgePoisson = new ForgePoisson();
 
 
     }
@@ -47,24 +47,21 @@ public class Vague {
     public int getNumVague(){ return numVague.getValue(); }
 
     public void ajouterPoisson() {
-        double aleatoire = Math.random() ;
-        String typePoisson;
+            double aleatoire = Math.random();
+            String typePoisson;
 
-        if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
-            typePoisson = "Saumon";
-        }
-        else if (aleatoire < tauxAlose){
-            typePoisson = "Alose";
-        }
-        else if (aleatoire < tauxLamproie ){
-            typePoisson = "Lamproie";
-        }
-        else{
-            typePoisson = "Esturgeon";
-        }
-        this.ForgePoisson.fabriquerPoisson(typePoisson);
+            if (aleatoire >= 0 && aleatoire < tauxSaumon) {
+                typePoisson = "Saumon";
+            } else if (aleatoire < tauxAlose) {
+                typePoisson = "Alose";
+            } else if (aleatoire < tauxLamproie) {
+                typePoisson = "Lamproie";
+            } else {
+                typePoisson = "Esturgeon";
+            }
+            this.ForgePoisson.fabriquerPoisson(typePoisson);
 
-        compteurDelai = 0;
+            compteurDelai = 0;
     }
 
     public void actionUnTour() {

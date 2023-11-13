@@ -25,7 +25,7 @@ public class ObservateurListePoissons implements ListChangeListener<Poisson> {
         while(p.next()){
 
             for (Poisson nouveau: p.getAddedSubList()){
-                vuePoisson v = new vuePoisson(vueMap, nouveau);
+                vuePoisson.creerSprite(vueMap, nouveau);
             }
 
             for (Poisson mort: p.getRemoved()){

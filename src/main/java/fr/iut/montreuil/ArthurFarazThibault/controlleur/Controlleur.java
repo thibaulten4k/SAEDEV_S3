@@ -230,7 +230,7 @@ public class Controlleur implements Initializable {
                         lancerecranGameOver();
                     }
 
-                    else if(environnement.getVague().getNumVague() >= 10){
+                    else if(environnement.getVague().getNumVague() >= 10 && environnement.getListePoissons().isEmpty()){
                         lancerEcranVictoire();
                     } else {
                         if(!pause) {

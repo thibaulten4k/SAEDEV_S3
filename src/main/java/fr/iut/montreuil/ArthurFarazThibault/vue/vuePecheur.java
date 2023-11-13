@@ -12,18 +12,14 @@ import javafx.scene.layout.Pane;
 
 public class vuePecheur {
 
-    private Pane vueMap;
-    private Pecheur p;
+    private static Image harponneur = new Image((vuePoisson.class.getResource( "/harponneur.png").toExternalForm()));
+    private static Image archer = new Image((vuePoisson.class.getResource( "/archer.png").toExternalForm()));
+    private static Image lanceur = new Image((vuePoisson.class.getResource( "/lanceur.png").toExternalForm()));
+    private static Image tremailleur = new Image((vuePoisson.class.getResource( "/tremailleur.png").toExternalForm()));
+    private static Image punkAChien = new Image((vuePoisson.class.getResource( "/punkAChien.png").toExternalForm()));
 
-    private Image harponneur = new Image((getClass().getResource( "/harponneur.png").toExternalForm()));
-    private Image archer = new Image((getClass().getResource( "/archer.png").toExternalForm()));
-    private Image lanceur = new Image((getClass().getResource( "/lanceur.png").toExternalForm()));
-    private Image tremailleur = new Image((getClass().getResource( "/tremailleur.png").toExternalForm()));
-    private Image punkAChien = new Image((getClass().getResource( "/punkAChien.png").toExternalForm()));
 
-    public vuePecheur(Pane vueMap, Pecheur p) {
-        this.vueMap = vueMap;
-        this.p = p;
+    public static void creerSprite(Pane vueMap, Pecheur p){
         ImageView imV = new ImageView();
 
         if (p instanceof Harponneur)

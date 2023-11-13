@@ -1,11 +1,7 @@
 package fr.iut.montreuil.ArthurFarazThibault.vue;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Archer;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Harponneur;
-import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.Lanceur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Alose;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Lamproie;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Saumon;
@@ -15,43 +11,14 @@ import javafx.scene.layout.Pane;
 
 public class vuePoisson {
 
-    private Pane vueMap;
-    private Poisson p;
+    private static Image saumon = new Image((vuePoisson.class.getResource( "/saumon.png").toExternalForm()));
+    private static Image alose = new Image((vuePoisson.class.getResource( "/alose.png").toExternalForm()));
+    private static Image lamproie = new Image((vuePoisson.class.getResource( "/lamproie.png").toExternalForm()));
+    private static Image esturgeon = new Image((vuePoisson.class.getResource( "/esturgeon.png").toExternalForm()));
 
-    private Image saumon = new Image((getClass().getResource( "/saumon.png").toExternalForm()));
-    private Image alose = new Image((getClass().getResource( "/alose.png").toExternalForm()));
-    private Image lamproie = new Image((getClass().getResource( "/lamproie.png").toExternalForm()));
-    private Image esturgeon = new Image((getClass().getResource( "/esturgeon.png").toExternalForm()));
 
-    public vuePoisson(Pane vueMap, Poisson p) {
 
-//        Circle r ;
-//
-//        if (p instanceof Saumon) {
-//            r = new Circle(6);
-//            r.setFill(Color.SALMON);
-//        }
-//        else if (p instanceof Lamproie) {
-//            r = new Circle(6);
-//            r.setFill(Color.WHITE);
-//        }
-//        else if (p instanceof Esturgeon) {
-//            r = new Circle(10);
-//            r.setFill(Color.LIGHTGRAY);
-//        }
-//        else{
-//            r = new Circle(8);
-//            r.setFill(Color.ALICEBLUE);
-//        }
-//        r.setId(p.getId());
-//
-//        // r .setOnMouseClicked(e−> System.out.println("clic sur acteur"+ e.getSource()));
-//        r.translateXProperty().bind(p.getXproperty());
-//        r.translateYProperty().bind(p.getYproperty());
-//        vueMap.getChildren().add(r);
-
-        this.vueMap = vueMap;
-        this.p = p;
+    public static void creerSprite(Pane vueMap, Poisson p){
         ImageView imV = new ImageView();
 
         if (p instanceof Saumon)

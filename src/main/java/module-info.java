@@ -5,6 +5,7 @@ module com.example.towerdefense_sprint1 {
 
 
     requires org.controlsfx.controls;
+    requires java.sql;
 
 
     opens fr.iut.montreuil.ArthurFarazThibault to javafx.fxml;

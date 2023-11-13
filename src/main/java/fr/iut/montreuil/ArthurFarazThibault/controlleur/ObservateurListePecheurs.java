@@ -31,7 +31,7 @@ public class ObservateurListePecheurs implements ListChangeListener<Pecheur> {
         while(p.next()){
 
                 for (Pecheur nouveau: p.getAddedSubList()){
-                    vuePecheur v = new vuePecheur(vueMap, nouveau);
+                    vuePecheur.creerSprite(vueMap, nouveau);
                 }
 
                 for (Pecheur mort: p.getRemoved()){
