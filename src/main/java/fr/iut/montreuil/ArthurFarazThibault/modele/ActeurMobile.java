@@ -5,8 +5,8 @@ public abstract class ActeurMobile extends Acteur {
     protected int vitesse, degat;
     protected ComportementDeplacement comportement;
 
-    public ActeurMobile(int x, int y, int vitesse, int degat) {
-        super(x, y);
+    public ActeurMobile(int x, int y, int taille, int vitesse, int degat) {
+        super(x, y, taille);
         this.vitesse = vitesse;
         this.degat = degat;
     }
