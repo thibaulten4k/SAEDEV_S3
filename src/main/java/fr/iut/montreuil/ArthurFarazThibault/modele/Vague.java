@@ -3,7 +3,7 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Vague {
+public class Vague /* extends StrategieVague */ {
 
     private double tauxSpawn;
 
@@ -23,7 +23,9 @@ public class Vague {
     private int compteurDelai;
 
 
-    public Vague (int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai) {
+    public Vague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai  ) {
+       //super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai,0);
+
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
 
