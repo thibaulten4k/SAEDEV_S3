@@ -57,6 +57,9 @@ public class Environnement {
         return uniqueInstance;
 
     }
+    public static void InitialiseEnvironnement(){
+        uniqueInstance=new Environnement(15, 10);
+    }
 
     public void construire() {
         for (int col = 0; col < this.nbLignes; col++) {
