@@ -113,6 +113,7 @@ public class Controlleur implements Initializable {
         this.pause = true;
 
         creerSpritesBoutonsRadio();
+        this.environnement.InitialiseEnvironnement();
 
         this.environnement = Environnement.getInstance();
 
