@@ -1,7 +1,5 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
-
 public abstract class Projectile extends ActeurMobile {
 
     protected int taille;
@@ -32,7 +30,7 @@ public abstract class Projectile extends ActeurMobile {
 
     }
 
-    public boolean poissonToucher(Poisson p) {
+    public boolean acteurToucher(Acteur p) {
         return ( ( Math.abs(p.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(p.getYpropertyValue() - this.getYpropertyValue()) ) <= this.taille);
     }
 
@@ -48,12 +46,17 @@ public abstract class Projectile extends ActeurMobile {
 
     public void attaquer() {
         for (Poisson p : Environnement.getInstance().getListePoissons()) {
-            if (poissonToucher(p)) {
+            if (acteurToucher(p)) {
                 p.subirDegat(this.getDegat());
                 if(effet != null)
                     effet.appliquerEffet(p);
                 this.soustraireDureeDeVie(-degatColison);
             }
+        }
+
+        for(Obstacle o : Environnement.getInstance().getListeObstacles()) {
+            if (acteurToucher(o))
+                this.soustraireDureeDeVie(-o.getResistance());
         }
     }
 
