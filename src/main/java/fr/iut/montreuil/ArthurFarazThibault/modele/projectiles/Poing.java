@@ -3,7 +3,7 @@ package fr.iut.montreuil.ArthurFarazThibault.modele.projectiles;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
 import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
-import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Ralentissement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Ralentissement ;
 import fr.iut.montreuil.ArthurFarazThibault.modele.effet.RetourDebutParcours;
 
 public class Poing extends Projectile {
