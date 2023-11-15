@@ -7,7 +7,7 @@ public class Alose extends Poisson {
 
     public Alose ( int x, int y) {
 
-        super( x, y, 4, 35, 15, 7) ;
+        super( x, y, 16,4, 35, 15, 7) ;
 
     }
 

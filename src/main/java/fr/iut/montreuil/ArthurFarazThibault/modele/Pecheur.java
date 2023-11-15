@@ -9,7 +9,7 @@ public abstract class Pecheur extends Acteur{
     private int compteurDelai;
 
     public Pecheur (int x, int y, int delai, int portee, int coût) {
-        super(x, y);
+        super(x, y, 16);
 
         this.delai = delai;
         this.portee = portee;
