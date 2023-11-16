@@ -2,32 +2,20 @@ package fr.iut.montreuil.ArthurFarazThibault.modele.bonus;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.*;
 
-public abstract class BonusStat extends Acteur {
+public abstract class BonusStat extends Bonus {
 
     protected Pecheur pecheur;
-    protected int cout , bonus;
+    protected int bonus;
 
     public BonusStat(double x, double y, int cout, int bonus) {
-        super((int)(x / Case.tailleCase) * Case.tailleCase + Case.tailleCase/2,
-                (int)(y / Case.tailleCase) * Case.tailleCase + Case.tailleCase/2, 1);
+        super(x, y, cout);
         this.pecheur = Environnement.getInstance().caseOccupeePecheur(this.getXpropertyValue(), this.getYpropertyValue());
-        this.cout = cout;
         this.bonus = bonus;
 
         if(pecheur != null) {
-            Environnement.getInstance().ajouterBonusStatAPecheur(this);
+            Environnement.getInstance().ajouterBonusAEnvironnement(this);
         }
 
     }
 
-    public abstract void appliquerBonus();
-
-    @Override
-    public void actionUnTour() {
-
-    }
-
-    public int getCout() {
-        return cout;
-    }
 }

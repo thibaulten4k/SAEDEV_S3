@@ -35,7 +35,6 @@ public class vueProjectile {
 
         forme.setId(p.getId());
 
-        // c .setOnMouseClicked(e−> System.out.println("clic sur acteur"+ e.getSource()));
         forme.translateXProperty().bind(p.getXproperty());
         forme.translateYProperty().bind(p.getYproperty());
         vueMap.getChildren().add(forme);

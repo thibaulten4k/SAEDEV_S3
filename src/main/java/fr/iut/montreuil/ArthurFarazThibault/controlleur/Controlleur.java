@@ -2,6 +2,7 @@ package fr.iut.montreuil.ArthurFarazThibault.controlleur;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusBombe;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusDelai;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusPortee;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusStat;
@@ -199,7 +200,7 @@ public class Controlleur implements Initializable {
             new BonusDelai(event.getX(), event.getY(), 400, 2);
         }
         else {
-            
+            new BonusBombe(event.getX(), event.getY(), 200);
         }
 
     }

@@ -25,31 +25,6 @@ public class vuePoisson {
 
     public vuePoisson(Pane vueMap, Poisson p) {
 
-//        Circle r ;
-//
-//        if (p instanceof Saumon) {
-//            r = new Circle(6);
-//            r.setFill(Color.SALMON);
-//        }
-//        else if (p instanceof Lamproie) {
-//            r = new Circle(6);
-//            r.setFill(Color.WHITE);
-//        }
-//        else if (p instanceof Esturgeon) {
-//            r = new Circle(10);
-//            r.setFill(Color.LIGHTGRAY);
-//        }
-//        else{
-//            r = new Circle(8);
-//            r.setFill(Color.ALICEBLUE);
-//        }
-//        r.setId(p.getId());
-//
-//        // r .setOnMouseClicked(e−> System.out.println("clic sur acteur"+ e.getSource()));
-//        r.translateXProperty().bind(p.getXproperty());
-//        r.translateYProperty().bind(p.getYproperty());
-//        vueMap.getChildren().add(r);
-
         this.vueMap = vueMap;
         this.p = p;
         ImageView imV = new ImageView();

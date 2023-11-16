@@ -28,8 +28,8 @@ public class ObservateurListeObstacles implements ListChangeListener<Obstacle> {
                 vueObstacle v = new vueObstacle(vueMap, nouveau);
             }
 
-            for (Obstacle mort: o.getRemoved()){
-                enleverSprite (mort);
+            for (Obstacle detruit: o.getRemoved()){
+                enleverSprite (detruit);
             }
         }
 
