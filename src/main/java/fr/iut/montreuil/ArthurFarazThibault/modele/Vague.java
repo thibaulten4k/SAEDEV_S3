@@ -1,7 +1,9 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Vague {
@@ -12,10 +14,10 @@ public class Vague {
 
     private fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson ForgePoisson;
 
-    private double tauxSaumon ;
-    private double tauxAlose ;
-    private double tauxLamproie ;
-    private double tauxEsturgeon ;
+    private DoubleProperty tauxSaumon ;
+    private DoubleProperty tauxAlose ;
+    private DoubleProperty tauxLamproie ;
+    private DoubleProperty tauxEsturgeon ;
 
     private int objectif ;
     private int compteurObjectif;
@@ -28,10 +30,10 @@ public class Vague {
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
 
-        this.tauxSaumon = tauxSaumon * 0.01;
-        this.tauxAlose = this.tauxSaumon + tauxAlose * 0.01;
-        this.tauxLamproie = this.tauxAlose + tauxLamproie * 0.01;
-        this.tauxEsturgeon = this.tauxLamproie + tauxEsturgeon * 0.01;
+        this.tauxSaumon = new SimpleDoubleProperty(tauxSaumon * 0.01);
+        this.tauxAlose = new SimpleDoubleProperty(this.tauxSaumon.getValue() + tauxAlose * 0.01) ;
+        this.tauxLamproie = new SimpleDoubleProperty(this.tauxAlose.getValue() + tauxLamproie * 0.01);
+        this.tauxEsturgeon = new SimpleDoubleProperty(this.tauxLamproie.getValue() + tauxEsturgeon * 0.01);
 
         this.objectif = objectif;
         this.compteurObjectif = 0;
@@ -47,17 +49,22 @@ public class Vague {
     public IntegerProperty getNumVagueProperty(){ return numVague; }
     public int getNumVague(){ return numVague.getValue(); }
 
+    public DoubleProperty tauxSaumonProperty() { return tauxSaumon; }
+    public DoubleProperty tauxAloseProperty() { return tauxAlose; }
+    public DoubleProperty tauxLamproieProperty() { return tauxLamproie;}
+    public DoubleProperty tauxEsturgeonProperty() { return tauxEsturgeon;}
+
     public void ajouterPoisson() {
         double aleatoire = Math.random() ;
         String typePoisson;
 
-        if ( aleatoire >= 0 && aleatoire < tauxSaumon ) {
+        if (aleatoire >= 0 && aleatoire < tauxSaumon.getValue()) {
             typePoisson = "Saumon";
         }
-        else if (aleatoire < tauxAlose){
+        else if (aleatoire < tauxAlose.getValue()){
             typePoisson = "Alose";
         }
-        else if (aleatoire < tauxLamproie ){
+        else if (aleatoire < tauxLamproie.getValue()){
             typePoisson = "Lamproie";
         }
         else{
@@ -80,30 +87,30 @@ public class Vague {
     }
 
     public void calculerLesTaux() {
-        tauxAlose += tauxSaumon;
-        tauxLamproie += tauxAlose;
-        tauxEsturgeon += tauxLamproie;
+        tauxAlose.setValue(tauxAlose.getValue() + tauxSaumon.getValue());
+        tauxLamproie.setValue(tauxLamproie.getValue() + tauxAlose.getValue());
+        tauxEsturgeon.setValue(tauxEsturgeon.getValue() + tauxLamproie.getValue());
 
     }
 
     public void incrementerLesTaux(double taux) {
-        if (tauxAlose - tauxSaumon >= 0)
-            tauxAlose -= tauxSaumon;
-        if (tauxLamproie - tauxSaumon >= 0)
-            tauxLamproie -= tauxSaumon;
-        if (tauxEsturgeon - tauxSaumon >= 0)
-            tauxEsturgeon  -= tauxSaumon;
+        if (tauxAlose.getValue() - tauxSaumon.getValue() >= 0)
+            tauxAlose.setValue(tauxAlose.getValue()  - tauxSaumon.getValue());
+        if (tauxLamproie.getValue() - tauxSaumon.getValue() >= 0)
+            tauxLamproie.setValue(tauxLamproie.getValue() - tauxSaumon.getValue());
+        if (tauxEsturgeon.getValue() - tauxSaumon.getValue() >= 0)
+            tauxEsturgeon.setValue(tauxEsturgeon.getValue()  - tauxSaumon.getValue());
 
-        tauxSaumon -= taux;
+        tauxSaumon.setValue(tauxSaumon.getValue() - taux);
 
         double aleatoire = Math.random();
 
         if (aleatoire >= 0 && aleatoire < 0.35)
-            tauxAlose += taux;
+            tauxAlose.setValue(tauxAlose.getValue() + taux);
         else if (aleatoire < 0.70)
-            tauxLamproie += taux;
+            tauxLamproie.setValue(tauxLamproie.getValue() + taux);
         else
-            tauxEsturgeon += taux;
+            tauxEsturgeon.setValue(tauxEsturgeon.getValue() + taux);
 
         calculerLesTaux();
     }
@@ -126,7 +133,5 @@ public class Vague {
             numVague.setValue(numVague.getValue() + 1);
 
     }
-
-
 
 }

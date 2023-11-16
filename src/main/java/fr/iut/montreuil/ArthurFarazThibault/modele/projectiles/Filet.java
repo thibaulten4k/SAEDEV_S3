@@ -10,7 +10,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.effet.Ralentissement;
 public class Filet extends Projectile {
 
     public Filet (int x, int y, Poisson poisson) {
-        super(x, y, 12, 5, 8, 45, 15, poisson, new Ralentissement());
+        super(x, y, 12, 5, 2, 45, 15, poisson, new Ralentissement());
         this.setComportement(new LigneDroite(this, poisson));
     }
 
