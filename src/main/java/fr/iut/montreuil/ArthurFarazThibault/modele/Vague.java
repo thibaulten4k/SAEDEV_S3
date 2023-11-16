@@ -3,6 +3,7 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson ;
 
 public class Vague extends StrategieVague {
 /*
@@ -65,7 +66,7 @@ public class Vague extends StrategieVague {
         else{
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.forgerPoisson(typePoisson);
+        this.forgePoisson.fabriquerPoisson(typePoisson);
 
         compteurDelai = 0;
     }
