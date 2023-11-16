@@ -2,20 +2,20 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 
 public abstract class Pecheur extends Acteur{
 
-    private int delai, portee, coût;
+    private int delai, portee, cout;
 
     private int compteurDelai;
 
-    public Pecheur (int x, int y, int delai, int portee, int coût) {
+    public Pecheur (int x, int y, int delai, int portee, int cout) {
         super(x, y, 16);
 
         this.delai = delai;
         this.portee = portee;
         this.compteurDelai = 0;
-        this.coût = coût;
+        this.cout = cout;
     }
 
-    public int getCoût() { return coût; }
+    public int getCout() { return cout; }
 
     public int getPortee() { return portee; }
     public void setPortee(int nouvPortee) { portee = nouvPortee; }

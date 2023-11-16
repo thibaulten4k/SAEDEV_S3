@@ -215,11 +215,11 @@ public class Environnement {
         else if (caseOccupee(pecheur.getXpropertyValue(), pecheur.getYpropertyValue())) {
             System.out.println("Case déjà occupée !");
         }
-        else if (pecheur.getCoût() > this.argentProperty.getValue()) {
+        else if (pecheur.getCout() > this.argentProperty.getValue()) {
             System.out.println("Erreur ! pas assez d'argent ! ");
         }
         else {
-            this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCoût());
+            this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCout());
             this.listePecheurs.add(pecheur);
         }
 

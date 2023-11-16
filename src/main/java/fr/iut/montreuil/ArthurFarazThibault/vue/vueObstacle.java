@@ -34,6 +34,8 @@ public class vueObstacle {
         imV.setY(obstacle.getYpropertyValue() - Case.tailleCase/2);
         imV.setX(obstacle.getXpropertyValue() - Case.tailleCase/2);
 
+        imV.setId(obstacle.getId());
+
         vueMap.getChildren().add(imV);
     }
 
