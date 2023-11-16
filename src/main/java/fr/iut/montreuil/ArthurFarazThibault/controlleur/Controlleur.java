@@ -2,7 +2,10 @@ package fr.iut.montreuil.ArthurFarazThibault.controlleur;
 
 import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
 import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
-import fr.iut.montreuil.ArthurFarazThibault.modele.ForgePecheur;
+import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusDelai;
+import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusPortee;
+import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusStat;
+import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
 import javafx.event.ActionEvent;
@@ -43,15 +46,8 @@ public class Controlleur implements Initializable {
 
 
     @FXML
-    private RadioButton selectionnerHarponneur;
-    @FXML
-    private RadioButton selectionnerLanceur;
-    @FXML
-    private RadioButton selectionnerArcher;
-    @FXML
-    private RadioButton selectionnerTremailleur;
-    @FXML
-    private RadioButton selectionnerPunkAChien;
+    private RadioButton selectionnerHarponneur, selectionnerLanceur, selectionnerArcher, selectionnerTremailleur, selectionnerPunkAChien,
+            selectionnerBombe, selectionnerPotionVitesse, selectionnerPotionPortee;
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
@@ -133,7 +129,7 @@ public class Controlleur implements Initializable {
 
         this.environnement.generationObstacles();
 
-        initAnimation();
+        gameLoop();
         //demarre l'animation
         gameLoop.play();
     }
@@ -147,6 +143,11 @@ public class Controlleur implements Initializable {
         Image lanceur_carte = new Image((getClass().getResource( "/lanceur_carte.png").toExternalForm()));
         Image tremailleur_carte = new Image((getClass().getResource( "/tremailleur_carte.png").toExternalForm()));
         Image punkAChien_carte = new Image((getClass().getResource( "/punkAChien_carte.png").toExternalForm()));
+
+        Image bombe_carte = new Image((getClass().getResource( "/bombe_carte.png").toExternalForm()));
+        Image potion_vitesse_carte = new Image((getClass().getResource( "/potion_vitesse_carte.png").toExternalForm()));
+        Image potion_portee_carte = new Image((getClass().getResource( "/potion_portee_carte.png").toExternalForm()));
+        Image potion_degat_carte = new Image((getClass().getResource( "/potion_degat_carte.png").toExternalForm()));
 
         ImageView harponneur = new ImageView(harponneur_carte);
         selectionnerHarponneur.setGraphic(harponneur);
@@ -162,10 +163,20 @@ public class Controlleur implements Initializable {
 
         ImageView punkAChien = new ImageView(punkAChien_carte);
         selectionnerPunkAChien.setGraphic(punkAChien);
+
+
+        ImageView bombe = new ImageView(bombe_carte);
+        selectionnerBombe.setGraphic(bombe);
+
+        ImageView potionVitesse = new ImageView(potion_vitesse_carte);
+        selectionnerPotionVitesse.setGraphic(potionVitesse);
+
+        ImageView potionPortee = new ImageView(potion_portee_carte);
+        selectionnerPotionPortee.setGraphic(potionPortee);
     }
 
     @FXML
-    public void placerPecheur(MouseEvent event) {
+    public void placerPecheurObjet(MouseEvent event) {
         if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
             ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
         }
@@ -179,6 +190,17 @@ public class Controlleur implements Initializable {
             ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
         } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
             ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
+        }
+
+
+        else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionPortee)) {
+            new BonusPortee(event.getX(), event.getY(), 300, 1);
+        }
+        else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionVitesse)) {
+            new BonusDelai(event.getX(), event.getY(), 400, 2);
+        }
+        else {
+            
         }
 
     }
@@ -216,7 +238,7 @@ public class Controlleur implements Initializable {
         gameLoop.play();
     }
 
-    private void initAnimation() {
+    private void gameLoop() {
 
         gameLoop = new Timeline();
         temps=0;

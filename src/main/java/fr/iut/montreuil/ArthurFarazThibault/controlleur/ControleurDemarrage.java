@@ -33,7 +33,7 @@ public class ControleurDemarrage implements Initializable {
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 480, 750);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Poisson contre pêcheur");
+        stage.setTitle("River Rush");
         stage.setScene(scene);
         stage.show();
     }
