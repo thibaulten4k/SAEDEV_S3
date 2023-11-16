@@ -1,5 +1,8 @@
-package fr.iut.montreuil.ArthurFarazThibault.modele;
+package fr.iut.montreuil.ArthurFarazThibault.modele.forge;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Alose;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Esturgeon;
 import fr.iut.montreuil.ArthurFarazThibault.modele.poissons.Lamproie;
@@ -34,7 +37,7 @@ public class ForgePoisson {
                 p = new Lamproie(newX, newY);
                 break;
         }
-        Environnement.getInstance().ajouterAListePoisson(p);
+        Environnement.getInstance().ajouterAListePoissons(p);
         return p;
 
     }

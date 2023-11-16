@@ -1,7 +1,5 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.projectiles.Harpon;
-
 public abstract class Pecheur extends Acteur{
 
     private int delai, portee, coût;
@@ -18,10 +16,15 @@ public abstract class Pecheur extends Acteur{
     }
 
     public int getCoût() { return coût; }
-    public int getPortee() { return portee; }
 
+    public int getPortee() { return portee; }
+    public void setPortee(int nouvPortee) { portee = nouvPortee; }
     public int getDelai() {
         return delai;
+    }
+    public void setDelai(int nouvDelai) {
+        delai = nouvDelai;
+        compteurDelai = 0;
     }
 
     public void actionUnTour() {
@@ -52,6 +55,6 @@ public abstract class Pecheur extends Acteur{
 
     public void attaquer(Poisson p) {
         Projectile proj = creerProjectile(this.getXpropertyValue(), this.getYpropertyValue(), p);
-        Environnement.getInstance().getListeProjectiles().add(proj);
+        Environnement.getInstance().ajouterAListeProjectiles(proj);
     }
 }

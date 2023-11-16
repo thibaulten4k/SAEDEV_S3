@@ -1,5 +1,8 @@
-package fr.iut.montreuil.ArthurFarazThibault.modele;
+package fr.iut.montreuil.ArthurFarazThibault.modele.forge;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.Case;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
+import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
 import fr.iut.montreuil.ArthurFarazThibault.modele.pecheurs.*;
 
 public class ForgePecheur {
@@ -15,26 +18,26 @@ public class ForgePecheur {
         switch (typePecheur) {
             case 1:
                 pecheur = new Harponneur(newX , newY);
-                environnement.ajouterPecheur(pecheur);
+                environnement.ajouterAListePecheurs(pecheur);
                 break;
 
             case 2:
                 pecheur = new Lanceur(newX, newY);
-                environnement.ajouterPecheur(pecheur);
+                environnement.ajouterAListePecheurs(pecheur);
                 break;
 
             case 3:
                 pecheur = new Archer(newX, newY);
-                environnement.ajouterPecheur(pecheur);
+                environnement.ajouterAListePecheurs(pecheur);
                 break;
 
             case 4:
                 pecheur = new Tremailleur(newX, newY);
-                environnement.ajouterPecheur(pecheur);
+                environnement.ajouterAListePecheurs(pecheur);
                 break;
             case 5:
                 pecheur = new PunkAChien(newX, newY);
-                environnement.ajouterPecheur(pecheur);
+                environnement.ajouterAListePecheurs(pecheur);
                 break;
         }
 

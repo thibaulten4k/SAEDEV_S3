@@ -5,7 +5,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Obstacle;
 public class Rocher extends Obstacle {
 
     public Rocher(int x, int y) {
-        super(x, y, 16,24);
+        super(x, y, 16);
     }
 
 }
