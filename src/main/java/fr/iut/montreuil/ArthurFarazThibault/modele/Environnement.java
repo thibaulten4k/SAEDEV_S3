@@ -1,5 +1,6 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.Bonus;
 import fr.iut.montreuil.ArthurFarazThibault.modele.obstacles.Buisson;
 import fr.iut.montreuil.ArthurFarazThibault.modele.obstacles.Rocher;
 import javafx.beans.property.IntegerProperty;
@@ -95,9 +96,9 @@ public class Environnement {
                 if(Environnement.getInstance().getPoidsCase(col, lig) != 0) {
                     random = Math.random();
                     if (random <= tauxBuisson) {
-                        Environnement.getInstance().ajouterObstacle(new Buisson( ((lig * 32) + 16), ((col * 32) + 16) ));
+                        Environnement.getInstance().ajouterAListeObstacles(new Buisson(lig, col) );
                     } else if (random <= tauxRocher) {
-                        Environnement.getInstance().ajouterObstacle(new Rocher( ((lig * 32) + 16), ((col * 32) + 16) ));
+                        Environnement.getInstance().ajouterAListeObstacles(new Rocher(lig, col) );
                     }
                 }
 
@@ -142,15 +143,6 @@ public class Environnement {
 
     public IntegerProperty getNbPoissonsTue () { return this.nbPoissonsTue ; }
 
-    public boolean estEncoreEnvie (Poisson cible) {
-        for (Poisson p : listePoissons) {
-            if (p == cible)
-                return true;
-        }
-        return false;
-
-    }
-
     public boolean caseOccupee(int x, int y) {
         for (Pecheur p : listePecheurs)
             if (p.getXpropertyValue() == x && p.getYpropertyValue() == y)
@@ -161,6 +153,21 @@ public class Environnement {
                 return true;
 
         return false;
+    }
+
+    public Pecheur caseOccupeePecheur(int x, int y) {
+        for (Pecheur p : listePecheurs)
+            if (p.getXpropertyValue() == x && p.getYpropertyValue() == y)
+                return p;
+
+        return null;
+    }
+    public Obstacle caseOccupeeObstacle(int x, int y) {
+        for (Obstacle o : listeObstacles)
+            if(o.getXpropertyValue() == x && o.getYpropertyValue() == y)
+                return o;
+
+        return null;
     }
 
     public void faireUnTour() {
@@ -199,28 +206,31 @@ public class Environnement {
 
     }
 
-    public void ajouterPecheur(Pecheur pecheur) {
+    public void ajouterAListePecheurs(Pecheur pecheur) {
         if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
             System.out.println("Il y a un obstacle sur cette case !");
         }
         else if (caseOccupee(pecheur.getXpropertyValue(), pecheur.getYpropertyValue())) {
             System.out.println("Case déjà occupée !");
         }
-        else if (pecheur.getCoût() > this.argentProperty.getValue()) {
+        else if (pecheur.getCout() > this.argentProperty.getValue()) {
             System.out.println("Erreur ! pas assez d'argent ! ");
         }
-         else {
-            this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCoût());
+        else {
+            this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCout());
             this.listePecheurs.add(pecheur);
         }
 
     }
-
-    public void ajouterObstacle(Obstacle obstacle) {
-        this.listeObstacles.add(obstacle);
+    public void ajouterAListePoissons(Poisson poisson) { this.listePoissons.add(poisson); }
+    public void ajouterAListeObstacles(Obstacle obstacle) { this.listeObstacles.add(obstacle); }
+    public void ajouterAListeProjectiles(Projectile projectile) { this.listeProjectiles.add(projectile); }
+    public void ajouterBonusAEnvironnement(Bonus bonus) {
+        if (this.getArgentPropertyValue() >= bonus.getCout()) {
+            bonus.appliquerBonus();
+            this.setArgentPropertyValue(this.getArgentPropertyValue() - bonus.getCout());
+        }
     }
-
-    public void ajouterAListePoisson(Poisson poisson) { this.listePoissons.add(poisson); }
 
     public ArrayList<Case> getParcours() { return this.parcours; }
 

@@ -9,7 +9,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.effet.RetourDebutParcours;
 public class Poing extends Projectile {
 
     public Poing (int x, int y, Poisson poisson) {
-        super(x, y, 10, 0, 20, 1, 1, poisson, new RetourDebutParcours());
+        super(x, y, 10, 0, 1, 1, 1, poisson, new RetourDebutParcours());
         this.setComportement(new LigneDroite(this, poisson));
     }
 
