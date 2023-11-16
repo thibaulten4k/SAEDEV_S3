@@ -96,14 +96,14 @@
                   </VBox>
                </children>
             </VBox>
-            <HBox prefHeight="240.0" prefWidth="120.0" />
+            <HBox prefHeight="380.0" prefWidth="119.0" />
             <VBox prefHeight="380.0" prefWidth="226.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="100.0" prefWidth="160.0">
+                        <VBox prefHeight="100.0" prefWidth="173.0">
                            <children>
-                              <HBox prefHeight="26.0" prefWidth="117.0">
+                              <HBox prefHeight="17.0" prefWidth="160.0">
                                  <children>
                                     <RadioButton fx:id="selectionnerBombe" mnemonicParsing="false" text="Bombe" toggleGroup="$groupeRadio" />
                                  </children>
@@ -113,7 +113,7 @@
                                     <RadioButton fx:id="selectionnerPotionVitesse" mnemonicParsing="false" text="Potion vitesse" toggleGroup="$groupeRadio" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="21.0" prefWidth="160.0">
                                  <children>
                                     <RadioButton fx:id="selectionnerPotionPortee" mnemonicParsing="false" text="Potion portée" toggleGroup="$groupeRadio" />
                                  </children>
@@ -122,7 +122,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox prefHeight="134.0" prefWidth="173.0" />
+                  <HBox prefHeight="63.0" prefWidth="171.0" />
                   <HBox prefHeight="24.0" prefWidth="153.0">
                      <children>
                         <Label text="Pv: " />
@@ -141,6 +141,58 @@
                         <ColorAdjust />
                      </effect>
                   </HBox>
+                  <HBox prefHeight="12.0" prefWidth="171.0">
+                     <children>
+                        <Label text="Taux Saumon: ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="affichageTauxSaumon" text="" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="273.0" prefHeight="12.0" prefWidth="171.0">
+                     <children>
+                        <Label text="Taux Alose: ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="affichageTauxAlose" text="" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="289.0" prefHeight="12.0" prefWidth="171.0">
+                     <children>
+                        <Label text="Taux Lamproie: ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="affichageTauxLamproie" text="" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="290.0" prefHeight="12.0" prefWidth="171.0">
+                     <children>
+                        <Label text="Taux Esturgeon: ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="affichageTauxEsturgeon" text="" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </HBox>
                   <HBox prefHeight="0.0" prefWidth="153.0">
                      <children>
                         <Label text="Poissons : ">
@@ -148,7 +200,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <Label fx:id="affichagePoissons" text=" siu" />
+                        <Label fx:id="affichagePoissons" />
                      </children>
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="153.0">
@@ -158,7 +210,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <Label fx:id="AffichageVague" text="" />
+                        <Label fx:id="affichageVague" text="" />
                      </children>
                   </HBox>
                   <HBox prefHeight="12.0" prefWidth="153.0">
