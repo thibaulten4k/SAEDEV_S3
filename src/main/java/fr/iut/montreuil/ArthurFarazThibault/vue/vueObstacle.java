@@ -30,7 +30,6 @@ public class vueObstacle {
         else
             imV.setImage(buisson);
 
-
         imV.setY(obstacle.getYpropertyValue() - Case.tailleCase/2);
         imV.setX(obstacle.getXpropertyValue() - Case.tailleCase/2);
 
