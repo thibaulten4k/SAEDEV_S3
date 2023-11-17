@@ -98,6 +98,7 @@ public class Controlleur implements Initializable {
     public void setstage(Stage stage){
         this.stage=stage;
     }
+    //salut maman ^^
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
