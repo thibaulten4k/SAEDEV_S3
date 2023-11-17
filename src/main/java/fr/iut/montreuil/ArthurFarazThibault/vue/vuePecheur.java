@@ -40,6 +40,8 @@ public class vuePecheur {
         imV.setY(pecheur.getYpropertyValue() - Case.tailleCase/2);
         imV.setX(pecheur.getXpropertyValue() - Case.tailleCase/2);
 
+        imV.setId(pecheur.getId());
+
         vueMap.getChildren().add(imV);
     }
 

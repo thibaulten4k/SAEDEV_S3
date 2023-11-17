@@ -13,8 +13,6 @@ public class vueTerrain {
 
     private Image water = new Image((getClass().getResource( "/water.png").toExternalForm()));
     private Image grass = new Image((getClass().getResource( "/grass.png").toExternalForm()));
-    private Image bush = new Image((getClass().getResource( "/bush.png").toExternalForm()));
-    private Image rock = new Image((getClass().getResource( "/rock.png").toExternalForm()));
 
     public vueTerrain(Environnement terrain, Pane vueMap, int tailleCase) {
         this.vueMap = vueMap;
@@ -31,17 +29,12 @@ public class vueTerrain {
 
                 if (this.terrain.getPoidsCase(i, j) == 0 || this.terrain.getPoidsCase(i, j) == 9)
                     imV.setImage(water);
-                else if (this.terrain.getPoidsCase(i, j) == 1)
-                    imV.setImage(grass);
-                else if (this.terrain.getPoidsCase(i, j) == 2)
-                    imV.setImage(bush);
                 else
-                    imV.setImage(rock);
+                    imV.setImage(grass);
 
                 vueMap.getChildren().add(imV);
                 imV.setY(i * tailleCase);
                 imV.setX(j * tailleCase);
-//              imV.setOnMouseDragOver();
 
                 imV.setOnMouseEntered(e ->  imV.setOpacity(0.75));
                 imV.setOnMouseExited(e ->  imV.setOpacity(1));
