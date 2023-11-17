@@ -13,16 +13,13 @@ public abstract class Acteur {
     protected IntegerProperty taille;
 
     protected String id;
-    protected static long compteur;
 
     public Acteur (int x, int y, int taille) {
         this.xProperty = new SimpleIntegerProperty(x);
         this.yproperty = new SimpleIntegerProperty(y);
         this.taille = new SimpleIntegerProperty(taille);
 
-        this.id = "A" + compteur;
-        compteur++;
-
+        this.id = genererId();
     }
 
     public void setXpropertyValue(int x) {
@@ -43,6 +40,7 @@ public abstract class Acteur {
     }
     public IntegerProperty getTailleProperty() { return taille; }
 
+    public abstract String genererId();
     public String getId() { return id; }
 
     public abstract void actionUnTour();

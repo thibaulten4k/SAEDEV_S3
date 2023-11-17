@@ -7,6 +7,8 @@ public abstract class Projectile extends ActeurMobile {
     protected Poisson cible;
     protected Effet effet;
 
+    protected static long compteurProjectile = 0;
+
     public Projectile(int x, int y, int taille, int vitesse, int degat, int dureeDeVie, int degatColision, Poisson cible, Effet effet) {
         super(x, y, taille, vitesse, degat);
 
@@ -31,6 +33,12 @@ public abstract class Projectile extends ActeurMobile {
     public boolean acteurToucher(Acteur acteur) {
         return ( ( Math.abs(acteur.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(acteur.getYpropertyValue() - this.getYpropertyValue()) )
                 < (this.taille.getValue()) + acteur.getTaillePropertyValue() );
+    }
+
+    @Override
+    public String genererId() {
+        compteurProjectile++;
+        return "Proj: " + compteurProjectile;
     }
 
     @Override
