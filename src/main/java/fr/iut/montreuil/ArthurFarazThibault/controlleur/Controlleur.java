@@ -130,11 +130,21 @@ public class Controlleur implements Initializable {
 
         this.environnement.generationObstacles();
 
+        this.stage = new Stage() ;
+
+       /* // Initialiser la variable this.stage
+        Stage primaryStage = (Stage) vueMap.getScene().getWindow();
+        this.setStage(primaryStage);
+        */
+
         gameLoop();
         //demarre l'animation
         gameLoop.play();
     }
 
+   /* public void setStage(Stage stage) {
+        this.stage = stage;
+    }*/
 
 
     @FXML
@@ -279,8 +289,12 @@ public class Controlleur implements Initializable {
 
         stage = (Stage) ((javafx.scene.Node) vueMap).getScene().getWindow();
         Scene scene = new Scene(root, 600, 400);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Poisson contre pêcheur");
+        if (this.stage != null) {
+            this.stage.setResizable(false);
+        }
+        else this.stage = new Stage() ;
+        // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Game Over");
         stage.setScene(scene);
         stage.show();
         gameLoop.stop();
