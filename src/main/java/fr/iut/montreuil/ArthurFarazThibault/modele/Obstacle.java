@@ -4,8 +4,8 @@ public class Obstacle extends Acteur {
 
     private int resistance;
 
-    public Obstacle(int x, int y, int taille, int resistance) {
-        super(x, y, taille);
+    public Obstacle(int x, int y, int taille) {
+        super(( (x * Case.tailleCase) + 16), ( (y * Case.tailleCase) + 16), taille);
 
         this.resistance = resistance;
     }

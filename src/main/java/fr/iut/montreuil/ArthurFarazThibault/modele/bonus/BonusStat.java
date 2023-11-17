@@ -1,22 +1,21 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele.bonus;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.BonusPecheur;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Pecheur;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Poisson;
-import fr.iut.montreuil.ArthurFarazThibault.modele.Projectile;
+import fr.iut.montreuil.ArthurFarazThibault.modele.*;
 
-public class BonusStat extends BonusPecheur {
-    public BonusStat(Pecheur pecheur, int delai, int portee, int coût) {
-        super(pecheur, delai, portee, coût);
+public abstract class BonusStat extends Bonus {
+
+    protected Pecheur pecheur;
+    protected int bonus;
+
+    public BonusStat(double x, double y, int cout, int bonus) {
+        super(x, y, cout);
+        this.pecheur = Environnement.getInstance().caseOccupeePecheur(this.getXpropertyValue(), this.getYpropertyValue());
+        this.bonus = bonus;
+
+        if(pecheur != null) {
+            Environnement.getInstance().ajouterBonusAEnvironnement(this);
+        }
+
     }
 
-    @Override
-    public Projectile creerProjectile(int x, int y, Poisson cible) {
-        return pecheur.creerProjectile(x, y, cible);
-    }
-
-    @Override
-    public void attaquer(Poisson p) {
-        pecheur.attaquer(p);
-    }
 }

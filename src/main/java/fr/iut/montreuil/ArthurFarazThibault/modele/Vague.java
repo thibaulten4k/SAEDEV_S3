@@ -1,5 +1,6 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -9,7 +10,7 @@ public class Vague extends StrategieVague {
 
     public IntegerProperty numVague;
 
-    private fr.iut.montreuil.ArthurFarazThibault.modele.ForgePoisson ForgePoisson;
+    private fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson ForgePoisson;
 
     private double tauxSaumon ;
     private double tauxAlose ;
