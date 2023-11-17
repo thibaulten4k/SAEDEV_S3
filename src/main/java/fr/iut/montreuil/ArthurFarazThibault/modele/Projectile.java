@@ -1,11 +1,14 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import java.util.ArrayList;
+
 public abstract class Projectile extends ActeurMobile {
 
     protected int dureeDeVie;
     protected int degatColison;
     protected Poisson cible;
     protected Effet effet;
+    protected ArrayList<Poisson> poisonsTouches;
 
     protected static long compteurProjectile = 0;
 
@@ -17,6 +20,7 @@ public abstract class Projectile extends ActeurMobile {
         this.cible = cible;
 
         this.effet = effet;
+        this.poisonsTouches = new ArrayList<>();
     }
 
     public int getDureeDeVie() { return dureeDeVie; }
@@ -53,8 +57,9 @@ public abstract class Projectile extends ActeurMobile {
 
     public void attaquer() {
         for (Poisson p : Environnement.getInstance().getListePoissons()) {
-            if (acteurToucher(p)) {
+            if (acteurToucher(p) && ! poisonsTouches.contains(p)) {
                 p.subirDegat(this.getDegat());
+                poisonsTouches.add(p);
                 if(effet != null)
                     effet.appliquerEffet(p);
                 this.soustraireDureeDeVie(-degatColison);
