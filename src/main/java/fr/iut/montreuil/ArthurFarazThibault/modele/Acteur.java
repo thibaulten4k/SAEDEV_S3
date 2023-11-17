@@ -7,7 +7,6 @@ public abstract class Acteur {
 
     // Les gens à créditer :
     // Rayan Kheroua
-    // Robin Castel
 
     protected IntegerProperty xProperty, yproperty;
     protected IntegerProperty taille;

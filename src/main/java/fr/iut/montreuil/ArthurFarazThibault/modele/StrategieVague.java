@@ -1,5 +1,6 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,7 +9,7 @@ public abstract class StrategieVague {
     public IntegerProperty numVague;  // numéro de la vague actuelle
     protected double tauxSpawn;   // taux de spwan générale (augmente à chaque vague)
 
-    protected ForgePoisson ForgePoisson;  // créer des poissons
+    protected ForgePoisson forgePoisson;  // créer des poissons
 
     protected double tauxSaumon ;  // probabilité d'apparition des poissons
     protected double tauxAlose ;
@@ -38,7 +39,7 @@ public abstract class StrategieVague {
 
         this.delai = delai;
         this.compteurDelai = delai;
-        this.ForgePoisson = new ForgePoisson();
+        this.forgePoisson = new ForgePoisson();
 
     }
 
@@ -62,7 +63,7 @@ public abstract class StrategieVague {
         else{
             typePoisson = "Esturgeon";
         }
-        this.ForgePoisson.forgerPoisson(typePoisson);
+        this.forgePoisson.fabriquerPoisson(typePoisson);
 
         compteurDelai = 0;
     }
