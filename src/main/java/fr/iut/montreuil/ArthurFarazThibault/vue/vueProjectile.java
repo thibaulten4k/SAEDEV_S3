@@ -32,11 +32,11 @@ public class vueProjectile {
             forme . setFill(Color.ROSYBROWN);
         }
 
+        forme.translateXProperty().bind(p.getXproperty());
+        forme.translateYProperty().bind(p.getYproperty());
 
         forme.setId(p.getId());
 
-        forme.translateXProperty().bind(p.getXproperty());
-        forme.translateYProperty().bind(p.getYproperty());
         vueMap.getChildren().add(forme);
     }
 }
