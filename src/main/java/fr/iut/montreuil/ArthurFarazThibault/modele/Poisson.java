@@ -7,6 +7,8 @@ public class Poisson extends ActeurMobile {
     private int pv;
     private int recompense;
 
+    protected static long compteurPoisson = 0;
+
     public Poisson(int x, int y, int taille, int vitesse, int pv, int recompense, int degat) {
         super(x, y, taille, vitesse, degat);
 
@@ -24,6 +26,11 @@ public class Poisson extends ActeurMobile {
         this.pv += -degat;
     }
 
+    @Override
+    public String genererId() {
+        compteurPoisson++;
+        return "Pois" + compteurPoisson;
+    }
 
     public void actionUnTour() {
         comportement.seDeplace();

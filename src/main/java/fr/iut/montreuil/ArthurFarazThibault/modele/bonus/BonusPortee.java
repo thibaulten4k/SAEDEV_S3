@@ -8,6 +8,7 @@ public class BonusPortee extends BonusStat {
         super(x, y, cout, bonus);
     }
 
+
     @Override
     public void appliquerBonus() {
         this.pecheur.setPortee(pecheur.getPortee() + this.bonus);
