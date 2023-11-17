@@ -61,10 +61,6 @@ public abstract class Projectile extends ActeurMobile {
             }
         }
 
-        for(Obstacle o : Environnement.getInstance().getListeObstacles()) {
-            if (acteurToucher(o))
-                this.soustraireDureeDeVie(-o.getResistance());
-        }
     }
 
     public String toString() { return "Projectile : " + this.id; }

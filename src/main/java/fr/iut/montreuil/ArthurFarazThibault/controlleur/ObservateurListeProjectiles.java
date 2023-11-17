@@ -28,7 +28,7 @@ public class ObservateurListeProjectiles implements ListChangeListener<Projectil
             }
 
             for (Projectile mort: p.getRemoved()){
-                enleverSprite (mort);
+                enleverSprite(mort);
             }
         }
     }
