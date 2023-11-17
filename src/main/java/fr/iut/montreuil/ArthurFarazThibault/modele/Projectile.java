@@ -38,7 +38,7 @@ public abstract class Projectile extends ActeurMobile {
     @Override
     public String genererId() {
         compteurProjectile++;
-        return "Proj: " + compteurProjectile;
+        return "Proj" + compteurProjectile;
     }
 
     @Override
