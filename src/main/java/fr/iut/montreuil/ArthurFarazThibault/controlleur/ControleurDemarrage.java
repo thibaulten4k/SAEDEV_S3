@@ -43,10 +43,15 @@ public class ControleurDemarrage implements Initializable {
         this.stage = stage;
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle, Stage stage) {
+        this.stage = stage ;
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
 
 
