@@ -12,29 +12,33 @@ import javafx.scene.layout.Pane;
 
 public class vuePecheur {
 
-    private static Image harponneur = new Image((vuePoisson.class.getResource( "/harponneur.png").toExternalForm()));
-    private static Image archer = new Image((vuePoisson.class.getResource( "/archer.png").toExternalForm()));
-    private static Image lanceur = new Image((vuePoisson.class.getResource( "/lanceur.png").toExternalForm()));
-    private static Image tremailleur = new Image((vuePoisson.class.getResource( "/tremailleur.png").toExternalForm()));
-    private static Image punkAChien = new Image((vuePoisson.class.getResource( "/punkAChien.png").toExternalForm()));
+    private Pane vueMap;
+    private Pecheur pecheur;
 
+    private Image harponneur = new Image((getClass().getResource( "/harponneur.png").toExternalForm()));
+    private Image archer = new Image((getClass().getResource( "/archer.png").toExternalForm()));
+    private Image lanceur = new Image((getClass().getResource( "/lanceur.png").toExternalForm()));
+    private Image tremailleur = new Image((getClass().getResource( "/tremailleur.png").toExternalForm()));
+    private Image punkAChien = new Image((getClass().getResource( "/punkAChien.png").toExternalForm()));
 
-    public static void creerSprite(Pane vueMap, Pecheur p){
+    public vuePecheur(Pane vueMap, Pecheur pecheur) {
+        this.vueMap = vueMap;
+        this.pecheur = pecheur;
         ImageView imV = new ImageView();
 
-        if (p instanceof Harponneur)
+        if (pecheur instanceof Harponneur)
             imV.setImage(harponneur);
-        else if (p instanceof Archer)
+        else if (pecheur instanceof Archer)
             imV.setImage(archer);
-        else if (p instanceof Lanceur)
+        else if (pecheur instanceof Lanceur)
             imV.setImage(lanceur);
-        else if (p instanceof Tremailleur)
+        else if (pecheur instanceof Tremailleur)
             imV.setImage(tremailleur);
         else
             imV.setImage(punkAChien);
 
-        imV.setY(p.getYpropertyValue() - Case.tailleCase/2);
-        imV.setX(p.getXpropertyValue() - Case.tailleCase/2);
+        imV.setY(pecheur.getYpropertyValue() - Case.tailleCase/2);
+        imV.setX(pecheur.getXpropertyValue() - Case.tailleCase/2);
 
         vueMap.getChildren().add(imV);
     }

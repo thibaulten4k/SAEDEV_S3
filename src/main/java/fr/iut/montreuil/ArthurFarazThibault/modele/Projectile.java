@@ -1,19 +1,15 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
-import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
-
 public abstract class Projectile extends ActeurMobile {
 
-    protected int taille;
     protected int dureeDeVie;
     protected int degatColison;
     protected Poisson cible;
     protected Effet effet;
 
-    public Projectile(int x, int y, int vitesse, int degat, int taille, int dureeDeVie, int degatColision, Poisson cible, Effet effet) {
-        super(x, y, vitesse, degat);
+    public Projectile(int x, int y, int taille, int vitesse, int degat, int dureeDeVie, int degatColision, Poisson cible, Effet effet) {
+        super(x, y, taille, vitesse, degat);
 
-        this.taille = taille;
         this.dureeDeVie = dureeDeVie;
         this.degatColison = degatColision;
         this.cible = cible;
@@ -32,8 +28,9 @@ public abstract class Projectile extends ActeurMobile {
 
     }
 
-    public boolean poissonToucher(Poisson p) {
-        return ( ( Math.abs(p.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(p.getYpropertyValue() - this.getYpropertyValue()) ) <= this.taille);
+    public boolean acteurToucher(Acteur acteur) {
+        return ( ( Math.abs(acteur.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(acteur.getYpropertyValue() - this.getYpropertyValue()) )
+                < (this.taille.getValue()) + acteur.getTaillePropertyValue() );
     }
 
     @Override
@@ -48,12 +45,17 @@ public abstract class Projectile extends ActeurMobile {
 
     public void attaquer() {
         for (Poisson p : Environnement.getInstance().getListePoissons()) {
-            if (poissonToucher(p)) {
+            if (acteurToucher(p)) {
                 p.subirDegat(this.getDegat());
                 if(effet != null)
                     effet.appliquerEffet(p);
                 this.soustraireDureeDeVie(-degatColison);
             }
+        }
+
+        for(Obstacle o : Environnement.getInstance().getListeObstacles()) {
+            if (acteurToucher(o))
+                this.soustraireDureeDeVie(-o.getResistance());
         }
     }
 

@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.ArthurFarazThibault.controlleur.Controlleur">
    <top>
-      <Pane fx:id="vueMap" onMouseClicked="#placerPecheur" prefHeight="320.0" prefWidth="480.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="vueMap" onMouseClicked="#placerPecheurObjet" prefHeight="320.0" prefWidth="480.0" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
       <HBox fx:id="menudejeu" prefHeight="385.0" prefWidth="480.0" BorderPane.alignment="CENTER">
@@ -74,7 +74,7 @@
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor>
                               </RadioButton>
-                              <Label prefHeight="16.0" prefWidth="256.0" text="Délai: 7 Coût: 400 $ Portée: 1" />
+                              <Label prefHeight="16.0" prefWidth="256.0" text="Délai: 7 Coût: 200 $ Portée: 1" />
                               <Label prefHeight="16.0" prefWidth="257.0" text="Spécial: Ralentit poissons" />
                            </children>
                         </VBox>
@@ -97,8 +97,32 @@
                </children>
             </VBox>
             <HBox prefHeight="240.0" prefWidth="120.0" />
-            <VBox prefHeight="240.0" prefWidth="199.0">
+            <VBox prefHeight="380.0" prefWidth="226.0">
                <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <HBox prefHeight="26.0" prefWidth="117.0">
+                                 <children>
+                                    <RadioButton fx:id="selectionnerBombe" mnemonicParsing="false" text="Bombe" toggleGroup="$groupeRadio" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="14.0" prefWidth="160.0">
+                                 <children>
+                                    <RadioButton fx:id="selectionnerPotionVitesse" mnemonicParsing="false" text="Potion vitesse" toggleGroup="$groupeRadio" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton fx:id="selectionnerPotionPortee" mnemonicParsing="false" text="Potion portée" toggleGroup="$groupeRadio" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="134.0" prefWidth="173.0" />
                   <HBox prefHeight="24.0" prefWidth="153.0">
                      <children>
                         <Label text="Pv: " />
@@ -137,7 +161,6 @@
                         <Label fx:id="AffichageVague" text="" />
                      </children>
                   </HBox>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#marcheArrêt" text="Marche / Arrêt" textOverrun="CLIP" />
                   <HBox prefHeight="12.0" prefWidth="153.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#vitesseMoitié" text="X 0.5" />
@@ -145,6 +168,7 @@
                         <Button mnemonicParsing="false" onAction="#vitesseDoublé" text="X 2" />
                      </children>
                   </HBox>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#marcheArrêt" text="Marche / Arrêt" textOverrun="CLIP" />
                </children>
             </VBox>
          </children>

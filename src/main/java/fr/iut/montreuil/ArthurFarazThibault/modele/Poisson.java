@@ -7,8 +7,8 @@ public class Poisson extends ActeurMobile {
     private int pv;
     private int recompense;
 
-    public Poisson(int x, int y, int vitesse, int pv, int recompense, int degat) {
-        super(x, y, vitesse, degat);
+    public Poisson(int x, int y, int taille, int vitesse, int pv, int recompense, int degat) {
+        super(x, y, taille, vitesse, degat);
 
         this.pv = pv;
         this.recompense = recompense;
@@ -33,7 +33,7 @@ public class Poisson extends ActeurMobile {
 
     public void meurt() {
         this.setPv(0);
-        this.setRecompense(recompense/2);
+        this.setRecompense(0);
         Environnement.getInstance().subirDegat(degat);
     }
 
