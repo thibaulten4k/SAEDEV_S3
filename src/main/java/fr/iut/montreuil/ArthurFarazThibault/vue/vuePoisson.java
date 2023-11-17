@@ -15,18 +15,13 @@ import javafx.scene.layout.Pane;
 
 public class vuePoisson {
 
-    private Pane vueMap;
-    private Poisson p;
+    private static Image saumon = new Image((vuePoisson.class.getResource( "/saumon.png").toExternalForm()));
+    private static Image alose = new Image((vuePoisson.class.getResource( "/alose.png").toExternalForm()));
+    private static Image lamproie = new Image((vuePoisson.class.getResource( "/lamproie.png").toExternalForm()));
+    private static Image esturgeon = new Image((vuePoisson.class.getResource( "/esturgeon.png").toExternalForm()));
 
-    private Image saumon = new Image((getClass().getResource( "/saumon.png").toExternalForm()));
-    private Image alose = new Image((getClass().getResource( "/alose.png").toExternalForm()));
-    private Image lamproie = new Image((getClass().getResource( "/lamproie.png").toExternalForm()));
-    private Image esturgeon = new Image((getClass().getResource( "/esturgeon.png").toExternalForm()));
+    public static void creerSprite(Pane vueMap, Poisson p) {
 
-    public vuePoisson(Pane vueMap, Poisson p) {
-
-        this.vueMap = vueMap;
-        this.p = p;
         ImageView imV = new ImageView();
 
         if (p instanceof Saumon)

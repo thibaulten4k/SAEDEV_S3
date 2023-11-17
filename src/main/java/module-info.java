@@ -3,8 +3,7 @@ module com.example.towerdefense_sprint1 {
     requires javafx.fxml;
     requires javafx.base;
     requires org.controlsfx.controls;
-
-
+    requires java.sql;
 
 
     opens fr.iut.montreuil.ArthurFarazThibault to javafx.fxml;
