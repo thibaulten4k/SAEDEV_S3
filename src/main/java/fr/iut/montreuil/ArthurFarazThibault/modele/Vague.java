@@ -6,44 +6,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson ;
 
 public class Vague extends StrategieVague {
-/*
-    private double tauxSpawn;
-
-    public IntegerProperty numVague;
-
-    private fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePoisson ForgePoisson;
-
-    private double tauxSaumon ;
-    private double tauxAlose ;
-    private double tauxLamproie ;
-    private double tauxEsturgeon ;
-
-    private int objectif ;
-    private int compteurObjectif;
-
-    private int delai;
-    private int compteurDelai;
-*/
 
     public Vague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai  ) {
         super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai, false);
-/*
-        this.tauxSpawn = tauxSpawn * 0.001;
-        this.numVague = new SimpleIntegerProperty(1);
-
-        this.tauxSaumon = tauxSaumon * 0.01;
-        this.tauxAlose = this.tauxSaumon + tauxAlose * 0.01;
-        this.tauxLamproie = this.tauxAlose + tauxLamproie * 0.01;
-        this.tauxEsturgeon = this.tauxLamproie + tauxEsturgeon * 0.01;
-
-        this.objectif = objectif;
-        this.compteurObjectif = 0;
-
-        this.delai = delai;
-        this.compteurDelai = delai;
-        this.ForgePoisson = new ForgePoisson();
-*/
-
     }
 
     public void incrementerCompteurObjectif() { this.compteurObjectif++; }

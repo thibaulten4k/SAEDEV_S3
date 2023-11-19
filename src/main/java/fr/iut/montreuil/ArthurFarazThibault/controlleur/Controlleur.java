@@ -131,19 +131,10 @@ public class Controlleur implements Initializable {
 
         this.stage = new Stage() ;
 
-       /* // Initialiser la variable this.stage
-        Stage primaryStage = (Stage) vueMap.getScene().getWindow();
-        this.setStage(primaryStage);
-        */
-
         gameLoop();
         //demarre l'animation
         gameLoop.play();
     }
-
-   /* public void setStage(Stage stage) {
-        this.stage = stage;
-    }*/
 
 
     @FXML
@@ -188,7 +179,6 @@ public class Controlleur implements Initializable {
     @FXML
     public void placerPecheurObjet(MouseEvent event) {
 
-        //if ( environnement.getVague().getPause() ) {
             if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
                 ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
             }
@@ -203,7 +193,6 @@ public class Controlleur implements Initializable {
             } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
                 ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
             }
-        //}
 
 
 
@@ -231,20 +220,6 @@ public class Controlleur implements Initializable {
         }
 
     }
-
-    /*public void marcheArrêt(ActionEvent event) {
-        if(!this.pausePartie) {
-            System.out.println("Arrêt");
-            this.pausePartie = true;
-
-        }
-        else {
-            System.out.println("Marche");
-            this.pausePartie = false;
-            environnement.getVague().setPauseFalse();
-        }
-
-    }*/
 
     @FXML
     public void vitesseMoitié(ActionEvent event) {
