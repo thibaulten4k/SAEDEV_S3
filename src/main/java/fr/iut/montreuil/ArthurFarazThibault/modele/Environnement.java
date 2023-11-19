@@ -28,7 +28,7 @@ public class Environnement {
     private IntegerProperty argentProperty;
     private IntegerProperty pvProperty;
     private int argentMax;
-    private Vague vague;
+    private StrategieVague vague;
     private IntegerProperty nbPoissonsTue ;
 
     public Environnement(int largeur, int hauteur) {
@@ -49,7 +49,8 @@ public class Environnement {
 
     }
 
-    public void setVague() { this.vague = new Vague(5,  100, 0, 0, 0, 25, 180); }
+    public void setVague() { this.vague = new VagueAvecPause(5, 100, 0, 0, 0, 25, 180) {
+    }; }
 
     public static Environnement getInstance() {
         /*if (uniqueInstance == null)
@@ -119,7 +120,7 @@ public class Environnement {
 
 
 
-    public Vague getVague(){
+    public StrategieVague getVague(){
         return this.vague;
     }
 
@@ -171,55 +172,68 @@ public class Environnement {
     }
 
     public void faireUnTour() {
-        if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
 
-            for (Pecheur p : listePecheurs) {
-                p.actionUnTour();
-            }
+        if ( !vague.getPause() ) {
 
-            for (int i = listeProjectiles.size() - 1; i >= 0; i--) {
-                Projectile p = listeProjectiles.get(i);
-                if (p.getDureeDeVie() <= 0) {
-                    listeProjectiles.remove(p);
-                } else {
+            if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
+
+                for (Pecheur p : listePecheurs) {
                     p.actionUnTour();
                 }
 
-            }
+                for (int i = listeProjectiles.size() - 1; i >= 0; i--) {
+                    Projectile p = listeProjectiles.get(i);
+                    if (p.getDureeDeVie() <= 0) {
+                        listeProjectiles.remove(p);
+                    } else {
+                        p.actionUnTour();
+                    }
 
-            for (int i = listePoissons.size() - 1; i >= 0; i--) {
-                Poisson p = listePoissons.get(i);
-                if (p.getPv() <= 0) {
-                    recupArgent(p.getRecompense());
-                    listePoissons.remove(p);
-                    nbPoissonsTue.setValue(nbPoissonsTue.getValue() + 1);
-                    vague.incrementerCompteurObjectif();
-                } else {
-                    p.actionUnTour();
                 }
 
-            }
+                for (int i = listePoissons.size() - 1; i >= 0; i--) {
+                    Poisson p = listePoissons.get(i);
+                    if (p.getPv() <= 0) {
+                        recupArgent(p.getRecompense());
+                        listePoissons.remove(p);
+                        nbPoissonsTue.setValue(nbPoissonsTue.getValue() + 1);
+                        vague.incrementerCompteurObjectif();
+                    } else {
+                        p.actionUnTour();
+                    }
 
-            vague.actionUnTour();
+                }
+
+                vague.actionUnTour();
+
+            }
 
         }
+
+
 
     }
 
     public void ajouterAListePecheurs(Pecheur pecheur) {
-        if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
-            System.out.println("Il y a un obstacle sur cette case !");
+        if ( this.vague.getPause() ) {
+
+            if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
+                System.out.println("Il y a un obstacle sur cette case !");
+            }
+            else if (caseOccupee(pecheur.getXpropertyValue(), pecheur.getYpropertyValue())) {
+                System.out.println("Case déjà occupée !");
+            }
+            else if (pecheur.getCout() > this.argentProperty.getValue()) {
+                System.out.println("Erreur ! pas assez d'argent ! ");
+            }
+            else {
+                this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCout());
+                this.listePecheurs.add(pecheur);
+            }
+
         }
-        else if (caseOccupee(pecheur.getXpropertyValue(), pecheur.getYpropertyValue())) {
-            System.out.println("Case déjà occupée !");
-        }
-        else if (pecheur.getCout() > this.argentProperty.getValue()) {
-            System.out.println("Erreur ! pas assez d'argent ! ");
-        }
-        else {
-            this.setArgentPropertyValue(getArgentPropertyValue() - pecheur.getCout());
-            this.listePecheurs.add(pecheur);
-        }
+
+
 
     }
     public void ajouterAListePoissons(Poisson poisson) { this.listePoissons.add(poisson); }

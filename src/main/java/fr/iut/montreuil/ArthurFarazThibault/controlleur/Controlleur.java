@@ -5,7 +5,6 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusBombe;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusDelai;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusPortee;
-import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusStat;
 import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
@@ -42,7 +41,7 @@ public class Controlleur implements Initializable {
     private Timeline gameLoop;
     private int temps;
     private Environnement environnement;
-    private boolean pause;
+    private boolean pausePartie;
 
 
 
@@ -107,7 +106,7 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        this.pause = true;
+        this.pausePartie = true;
 
         creerSpritesBoutonsRadio();
         this.environnement.InitialiseEnvironnement();
@@ -188,20 +187,24 @@ public class Controlleur implements Initializable {
 
     @FXML
     public void placerPecheurObjet(MouseEvent event) {
-        if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
-        } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
-        }
+
+        //if ( environnement.getVague().getPause() ) {
+            if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+            } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
+            }
+        //}
+
 
 
         else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionPortee)) {
@@ -217,13 +220,14 @@ public class Controlleur implements Initializable {
     }
 
     public void marcheArrêt(ActionEvent event) {
-        if(pause) {
+        if(this.pausePartie) {
             System.out.println("Marche");
-            pause = false;
+            this.pausePartie = false;
+            environnement.getVague().setPauseFalse();
         }
         else {
             System.out.println("Arrêt");
-            pause = true;
+            this.pausePartie = true;
         }
 
     }
@@ -267,7 +271,7 @@ public class Controlleur implements Initializable {
                     else if(environnement.getVague().getNumVague() >= 10){
                         lancerEcranVictoire();
                     } else {
-                        if(!pause) {
+                        if(!pausePartie) {
                             environnement.faireUnTour();
                             temps++;
                         }
