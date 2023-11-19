@@ -24,7 +24,7 @@ public abstract class StrategieVague {
 
     protected boolean pause ;  // 0 pour pas de pause et 1 pour pause
 
-    public StrategieVague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai ) {
+    public StrategieVague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai, boolean pause ) {
 
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
@@ -40,7 +40,7 @@ public abstract class StrategieVague {
         this.delai = delai;
         this.compteurDelai = delai;
         this.forgePoisson = new ForgePoisson();
-        this.pause = true ;
+        this.pause = pause ;
 
     }
 
@@ -127,6 +127,7 @@ public abstract class StrategieVague {
         numVague.setValue(numVague.getValue() + 1);
 
     }
+    abstract boolean autoriserPlacementPecheur() ;
 
     public void setPauseTrue() { this.pause = true ; }
 

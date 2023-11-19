@@ -49,7 +49,7 @@ public class Environnement {
 
     }
 
-    public void setVague() { this.vague = new VagueAvecPause(5, 100, 0, 0, 0, 25, 180) {
+    public void setVague() { this.vague = new Vague(5, 100, 0, 0, 0, 25, 180) {
     }; }
 
     public static Environnement getInstance() {
@@ -173,7 +173,7 @@ public class Environnement {
 
     public void faireUnTour() {
 
-        if ( !vague.getPause() ) {
+        if ( !this.vague.getPause() ) {
 
             if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
 
@@ -215,7 +215,7 @@ public class Environnement {
     }
 
     public void ajouterAListePecheurs(Pecheur pecheur) {
-        if ( this.vague.getPause() ) {
+        if ( this.vague.autoriserPlacementPecheur() ) {
 
             if (this.getPoidsCase(pecheur.getYpropertyValue() / Case.tailleCase, pecheur.getXpropertyValue() / Case.tailleCase) != 1) {
                 System.out.println("Il y a un obstacle sur cette case !");
@@ -243,6 +243,9 @@ public class Environnement {
         if (this.getArgentPropertyValue() >= bonus.getCout()) {
             bonus.appliquerBonus();
             this.setArgentPropertyValue(this.getArgentPropertyValue() - bonus.getCout());
+        }
+        else {
+            System.out.println("Pas assez d'argent, nécessite: " + bonus.getCout() +"!") ;
         }
     }
 

@@ -4,7 +4,7 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 
     public VagueAvecPause ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai ) {
 
-        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai);
+        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai, true);
 
     }
 
@@ -25,8 +25,12 @@ package fr.iut.montreuil.ArthurFarazThibault.modele;
 
             numVague.setValue(numVague.getValue() + 1);
             this.setPauseTrue();
+            System.out.println("Nouvelle vague ! : Pause !");
 
         }
+
+        @Override
+        boolean autoriserPlacementPecheur() { return this.pause ; }
 
 
     }

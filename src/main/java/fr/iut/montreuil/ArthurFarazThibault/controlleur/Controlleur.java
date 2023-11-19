@@ -232,6 +232,20 @@ public class Controlleur implements Initializable {
 
     }
 
+    /*public void marcheArrêt(ActionEvent event) {
+        if(!this.pausePartie) {
+            System.out.println("Arrêt");
+            this.pausePartie = true;
+
+        }
+        else {
+            System.out.println("Marche");
+            this.pausePartie = false;
+            environnement.getVague().setPauseFalse();
+        }
+
+    }*/
+
     @FXML
     public void vitesseMoitié(ActionEvent event) {
         gameLoop.setRate(0.5);
@@ -263,6 +277,11 @@ public class Controlleur implements Initializable {
 
                 Duration.seconds(0.017),
                 (ev ->{
+
+                    if ( this.environnement.getVague().getPause() ) {
+                        this.pausePartie = true ;
+                        //System.out.println("Pause pour pêcheurs (Nouvelle vague) ");
+                    }
 
                     if(environnement.getPvPropertyValue() <= 0) {
                         lancerecranGameOver();

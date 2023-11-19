@@ -26,7 +26,7 @@ public class Vague extends StrategieVague {
 */
 
     public Vague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai  ) {
-        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai);
+        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai, false);
 /*
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
@@ -130,6 +130,8 @@ public class Vague extends StrategieVague {
 
     }
 
+    @Override
+    boolean autoriserPlacementPecheur() { return true ; }
 
 
 }
