@@ -22,8 +22,8 @@ public class Vague extends StrategieVague {
     private int compteurDelai;
 */
 
-    public Vague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai  ) {
-        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai,0);
+    public Vague ( int tauxSpawn, int tauxSaumon, int tauxAlose, int tauxLamproie, int tauxEsturgeon, int objectif, int delai ) {
+        super(tauxSpawn,tauxSaumon,tauxAlose,tauxLamproie,tauxEsturgeon,objectif,delai);
 /*
         this.tauxSpawn = tauxSpawn * 0.001;
         this.numVague = new SimpleIntegerProperty(1);
@@ -43,7 +43,7 @@ public class Vague extends StrategieVague {
 
     }
 
-    public void incrementerCompteurObjectif() { this.compteurObjectif++; }
+   /* public void incrementerCompteurObjectif() { this.compteurObjectif++; }
     public IntegerProperty getNumVagueProperty(){ return numVague; }
     public int getNumVague(){ return numVague.getValue(); }
 
@@ -124,6 +124,25 @@ public class Vague extends StrategieVague {
             incrementerLesTaux(0.1);
 
             numVague.setValue(numVague.getValue() + 1);
+
+    }*/
+
+    public void evolutionVague() {
+        objectif = (int)(objectif * 1.2);
+        compteurObjectif = 0;
+
+        tauxSpawn = tauxSpawn * 2;
+        if (tauxSpawn > 0.1)
+            tauxSpawn = 0.1;
+
+
+        delai = (int) (delai/1.5);
+        if (delai < 3)
+            delai = 3;
+
+        incrementerLesTaux(0.1);
+
+        numVague.setValue(numVague.getValue() + 1);
 
     }
 

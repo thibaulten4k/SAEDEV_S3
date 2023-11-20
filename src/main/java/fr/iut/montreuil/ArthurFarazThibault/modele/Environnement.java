@@ -28,7 +28,7 @@ public class Environnement {
     private IntegerProperty argentProperty;
     private IntegerProperty pvProperty;
     private int argentMax;
-    private Vague vague;
+    private StrategieVague vague;
     private IntegerProperty nbPoissonsTue ;
 
     public Environnement(int largeur, int hauteur) {
@@ -49,7 +49,7 @@ public class Environnement {
 
     }
 
-    public void setVague() { this.vague = new Vague(5,  100, 0, 0, 0, 25, 180); }
+    public void setVague() { this.vague = new VagueAvecPause(5,  100, 0, 0, 0, 25, 180); }
 
     public static Environnement getInstance() {
         /*if (uniqueInstance == null)
@@ -119,7 +119,7 @@ public class Environnement {
 
 
 
-    public Vague getVague(){
+    public StrategieVague getVague(){
         return this.vague;
     }
 
@@ -171,7 +171,7 @@ public class Environnement {
     }
 
     public void faireUnTour() {
-        if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10) {
+        if (pvProperty.getValue() > 0 && vague.getNumVague() <= 10 && vague.isPause() == false ) {
 
             for (Pecheur p : listePecheurs) {
                 p.actionUnTour();

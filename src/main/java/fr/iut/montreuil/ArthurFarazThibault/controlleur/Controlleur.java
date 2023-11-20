@@ -188,31 +188,34 @@ public class Controlleur implements Initializable {
 
     @FXML
     public void placerPecheurObjet(MouseEvent event) {
-        if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
-        } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
-        }
+        if ( environnement.getVague().isPause() ) {
+            if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+            } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
+            }
 
 
-        else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionPortee)) {
-            new BonusPortee(event.getX(), event.getY(), 300, 1);
+            else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionPortee)) {
+                new BonusPortee(event.getX(), event.getY(), 300, 1);
+            }
+            else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionVitesse)) {
+                new BonusDelai(event.getX(), event.getY(), 400, 2);
+            }
+            else {
+                new BonusBombe(event.getX(), event.getY(), 200);
+            }
         }
-        else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionVitesse)) {
-            new BonusDelai(event.getX(), event.getY(), 400, 2);
-        }
-        else {
-            new BonusBombe(event.getX(), event.getY(), 200);
-        }
+
 
     }
 
@@ -220,6 +223,7 @@ public class Controlleur implements Initializable {
         if(pause) {
             System.out.println("Marche");
             pause = false;
+            environnement.getVague().setPauseFalse();
         }
         else {
             System.out.println("Arrêt");
