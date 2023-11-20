@@ -141,58 +141,6 @@
                         <ColorAdjust />
                      </effect>
                   </HBox>
-                  <HBox prefHeight="12.0" prefWidth="171.0">
-                     <children>
-                        <Label text="Taux Saumon: ">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="affichageTauxSaumon" text="" />
-                     </children>
-                     <effect>
-                        <ColorAdjust />
-                     </effect>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="273.0" prefHeight="12.0" prefWidth="171.0">
-                     <children>
-                        <Label text="Taux Alose: ">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="affichageTauxAlose" text="" />
-                     </children>
-                     <effect>
-                        <ColorAdjust />
-                     </effect>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="289.0" prefHeight="12.0" prefWidth="171.0">
-                     <children>
-                        <Label text="Taux Lamproie: ">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="affichageTauxLamproie" text="" />
-                     </children>
-                     <effect>
-                        <ColorAdjust />
-                     </effect>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="290.0" prefHeight="12.0" prefWidth="171.0">
-                     <children>
-                        <Label text="Taux Esturgeon: ">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="affichageTauxEsturgeon" text="" />
-                     </children>
-                     <effect>
-                        <ColorAdjust />
-                     </effect>
-                  </HBox>
                   <HBox prefHeight="0.0" prefWidth="153.0">
                      <children>
                         <Label text="Poissons : ">

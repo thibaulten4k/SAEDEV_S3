@@ -123,11 +123,6 @@ public class Controlleur implements Initializable {
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
         this.affichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
 
-        this.affichageTauxSaumon.textProperty().bind(this.environnement.getVague().tauxSaumonProperty().asString());
-        this.affichageTauxAlose.textProperty().bind(this.environnement.getVague().tauxAloseProperty().asString());
-        this.affichageTauxLamproie.textProperty().bind(this.environnement.getVague().tauxLamproieProperty().asString());
-        this.affichageTauxEsturgeon.textProperty().bind(this.environnement.getVague().tauxEsturgeonProperty().asString());
-
         this.environnement.generationObstacles();
 
         this.stage = new Stage() ;

@@ -49,7 +49,7 @@ public class Environnement {
 
     }
 
-    public void setVague() { this.vague = new Vague(5, 100, 0, 0, 0, 25, 180) {
+    public void setVague() { this.vague = new VagueAvecPause(5, 100, 0, 0, 0, 25, 180) {
     }; }
 
     public static Environnement getInstance() {

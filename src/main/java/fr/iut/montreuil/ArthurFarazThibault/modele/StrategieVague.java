@@ -136,7 +136,19 @@ public abstract class StrategieVague {
     public boolean getPause () { return this.pause ; }
 
 
+    public double getTauxSaumon() {
+        return tauxSaumon;
+    }
 
+    public double getTauxAlose() {
+        return tauxAlose;
+    }
 
+    public double getTauxLamproie() {
+        return tauxLamproie;
+    }
 
+    public double getTauxEsturgeon() {
+        return tauxEsturgeon;
+    }
 }
