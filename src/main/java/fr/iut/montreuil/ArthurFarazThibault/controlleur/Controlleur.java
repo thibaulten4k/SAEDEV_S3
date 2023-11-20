@@ -51,13 +51,8 @@ public class Controlleur implements Initializable {
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
-    private Label affichagePv ;
-    @FXML
-    private Label affichageArgent ;
-    @FXML
-    private Label affichagePoissons;
-    @FXML
-    private Label AffichageVague;
+    private Label affichagePv, affichageArgent, affichagePoissons, affichageVague,
+            affichageTauxSaumon, affichageTauxAlose, affichageTauxLamproie, affichageTauxEsturgeon;
     @FXML
     private Pane vueMap;
 
@@ -103,6 +98,7 @@ public class Controlleur implements Initializable {
     public void setstage(Stage stage){
         this.stage=stage;
     }
+    //salut maman ^^
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -125,7 +121,12 @@ public class Controlleur implements Initializable {
         this.affichagePv.textProperty().bind(this.environnement.getPvProperty().asString());
         this.affichageArgent.textProperty().bind(this.environnement.getArgentProperty().asString());
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
-        this.AffichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
+        this.affichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
+
+        this.affichageTauxSaumon.textProperty().bind(this.environnement.getVague().tauxSaumonProperty().asString());
+        this.affichageTauxAlose.textProperty().bind(this.environnement.getVague().tauxAloseProperty().asString());
+        this.affichageTauxLamproie.textProperty().bind(this.environnement.getVague().tauxLamproieProperty().asString());
+        this.affichageTauxEsturgeon.textProperty().bind(this.environnement.getVague().tauxEsturgeonProperty().asString());
 
         this.environnement.generationObstacles();
 
@@ -262,7 +263,7 @@ public class Controlleur implements Initializable {
                         lancerecranGameOver();
                     }
 
-                    else if(environnement.getVague().getNumVague() >= 10){
+                    else if(environnement.getVague().getNumVague() >= 10 && environnement.getListePoissons().isEmpty()){
                         lancerEcranVictoire();
                     } else {
                         if(!pausePartie) {

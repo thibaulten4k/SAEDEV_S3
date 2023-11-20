@@ -5,6 +5,7 @@ public abstract class Pecheur extends Acteur{
     private int delai, portee, cout;
 
     private int compteurDelai;
+    protected static long compteurPecheur = 0;
 
     public Pecheur (int x, int y, int delai, int portee, int cout) {
         super(x, y, 16);
@@ -25,6 +26,12 @@ public abstract class Pecheur extends Acteur{
     public void setDelai(int nouvDelai) {
         delai = nouvDelai;
         compteurDelai = 0;
+    }
+
+    @Override
+    public String genererId() {
+        compteurPecheur++;
+        return "Pech" + compteurPecheur;
     }
 
     public void actionUnTour() {

@@ -7,7 +7,7 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.deplacements.LigneDroite;
 public class Harpon extends Projectile {
 
     public Harpon (int x, int y, Poisson poisson) {
-        super(x, y, 10, 13, 14, 75, 15, poisson, null);
+        super(x, y, 10, 12, 14, 60, 30, poisson, null);
         this.setComportement(new LigneDroite(this, poisson));
     }
 

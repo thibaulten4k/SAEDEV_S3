@@ -53,9 +53,6 @@ public class Environnement {
     }; }
 
     public static Environnement getInstance() {
-        /*if (uniqueInstance == null)
-            uniqueInstance = new Environnement(15, 10);*/
-
         return uniqueInstance;
 
     }
@@ -94,7 +91,7 @@ public class Environnement {
 
         for (int col = 0; col < this.nbLignes; col++) {
             for (int lig = 0; lig < this.nbColonnes; lig++) {
-                if(Environnement.getInstance().getPoidsCase(col, lig) != 0) {
+                if(Environnement.getInstance().getPoidsCase(col, lig) == 1) {
                     random = Math.random();
                     if (random <= tauxBuisson) {
                         Environnement.getInstance().ajouterAListeObstacles(new Buisson(lig, col) );
@@ -259,4 +256,3 @@ public class Environnement {
     }
 
 }
-
