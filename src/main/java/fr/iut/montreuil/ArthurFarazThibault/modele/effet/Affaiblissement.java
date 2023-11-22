@@ -7,7 +7,7 @@ public class Affaiblissement extends Effet {
 
     @Override
     public void appliquerEffet(Poisson p) {
-        p.setDegat(p.getDegat()/2);
+        p.setDegat( (int) (p.getDegat() * 0.5 ) );
         if(p.getDegat() < 0)
             p.setDegat(1);
     }

@@ -23,11 +23,11 @@ public class HelloApplication extends Application {
 
 
         cd = fxmlLoader.getController();
-        cd.initialize(null, null);
+        cd.initialize(null, null, PrStage );
 
     }
     public void setCd(){
-        this.cd=new ControleurDemarrage();
+        //this.cd=new ControleurDemarrage();
     }
 
 

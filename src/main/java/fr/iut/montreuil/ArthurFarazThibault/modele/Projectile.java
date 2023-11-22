@@ -1,11 +1,16 @@
 package fr.iut.montreuil.ArthurFarazThibault.modele;
 
+import java.util.ArrayList;
+
 public abstract class Projectile extends ActeurMobile {
 
     protected int dureeDeVie;
     protected int degatColison;
     protected Poisson cible;
     protected Effet effet;
+    protected ArrayList<Poisson> poissonsTouches;
+
+    protected static long compteurProjectile = 0;
 
     public Projectile(int x, int y, int taille, int vitesse, int degat, int dureeDeVie, int degatColision, Poisson cible, Effet effet) {
         super(x, y, taille, vitesse, degat);
@@ -15,6 +20,7 @@ public abstract class Projectile extends ActeurMobile {
         this.cible = cible;
 
         this.effet = effet;
+        this.poissonsTouches = new ArrayList<>();
     }
 
     public int getDureeDeVie() { return dureeDeVie; }
@@ -34,6 +40,12 @@ public abstract class Projectile extends ActeurMobile {
     }
 
     @Override
+    public String genererId() {
+        compteurProjectile++;
+        return "Proj" + compteurProjectile;
+    }
+
+    @Override
     public void actionUnTour() {
         comportement.seDeplace();
         attaquer();
@@ -45,18 +57,15 @@ public abstract class Projectile extends ActeurMobile {
 
     public void attaquer() {
         for (Poisson p : Environnement.getInstance().getListePoissons()) {
-            if (acteurToucher(p)) {
+            if (acteurToucher(p) && ! poissonsTouches.contains(p)) {
                 p.subirDegat(this.getDegat());
+                poissonsTouches.add(p);
                 if(effet != null)
                     effet.appliquerEffet(p);
                 this.soustraireDureeDeVie(-degatColison);
             }
         }
 
-        for(Obstacle o : Environnement.getInstance().getListeObstacles()) {
-            if (acteurToucher(o))
-                this.soustraireDureeDeVie(-o.getResistance());
-        }
     }
 
     public String toString() { return "Projectile : " + this.id; }

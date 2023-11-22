@@ -5,7 +5,6 @@ import fr.iut.montreuil.ArthurFarazThibault.modele.Environnement;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusBombe;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusDelai;
 import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusPortee;
-import fr.iut.montreuil.ArthurFarazThibault.modele.bonus.BonusStat;
 import fr.iut.montreuil.ArthurFarazThibault.modele.forge.ForgePecheur;
 
 import fr.iut.montreuil.ArthurFarazThibault.vue.vueTerrain;
@@ -42,7 +41,7 @@ public class Controlleur implements Initializable {
     private Timeline gameLoop;
     private int temps;
     private Environnement environnement;
-    private boolean pause;
+    private boolean pausePartie;
 
 
 
@@ -52,13 +51,8 @@ public class Controlleur implements Initializable {
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
-    private Label affichagePv ;
-    @FXML
-    private Label affichageArgent ;
-    @FXML
-    private Label affichagePoissons;
-    @FXML
-    private Label AffichageVague;
+    private Label affichagePv, affichageArgent, affichagePoissons, affichageVague,
+            affichageTauxSaumon, affichageTauxAlose, affichageTauxLamproie, affichageTauxEsturgeon;
     @FXML
     private Pane vueMap;
 
@@ -104,10 +98,11 @@ public class Controlleur implements Initializable {
     public void setstage(Stage stage){
         this.stage=stage;
     }
+    //salut maman ^^
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        this.pause = true;
+        this.pausePartie = true;
 
         creerSpritesBoutonsRadio();
         this.environnement.InitialiseEnvironnement();
@@ -126,15 +121,16 @@ public class Controlleur implements Initializable {
         this.affichagePv.textProperty().bind(this.environnement.getPvProperty().asString());
         this.affichageArgent.textProperty().bind(this.environnement.getArgentProperty().asString());
         this.affichagePoissons.textProperty().bind(this.environnement.getNbPoissonsTue().asString());
-        this.AffichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
+        this.affichageVague.textProperty().bind(this.environnement.getVague().getNumVagueProperty().asString());
 
         this.environnement.generationObstacles();
+
+        this.stage = new Stage() ;
 
         gameLoop();
         //demarre l'animation
         gameLoop.play();
     }
-
 
 
     @FXML
@@ -178,20 +174,22 @@ public class Controlleur implements Initializable {
 
     @FXML
     public void placerPecheurObjet(MouseEvent event) {
-        if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
-        }
-        else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
-        } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
-            ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
-        }
+
+            if (groupeRadio.getSelectedToggle().equals(selectionnerHarponneur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 1);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerLanceur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 2);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerArcher)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 3);
+            }
+            else if (groupeRadio.getSelectedToggle().equals(selectionnerTremailleur)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 4);
+            } else if (groupeRadio.getSelectedToggle().equals(selectionnerPunkAChien)) {
+                ForgePecheur.creerPecheur(event.getX(), event.getY(), 5);
+            }
+
 
 
         else if(groupeRadio.getSelectedToggle().equals(selectionnerPotionPortee)) {
@@ -207,13 +205,14 @@ public class Controlleur implements Initializable {
     }
 
     public void marcheArrêt(ActionEvent event) {
-        if(pause) {
+        if(this.pausePartie) {
             System.out.println("Marche");
-            pause = false;
+            this.pausePartie = false;
+            environnement.getVague().setPauseFalse();
         }
         else {
             System.out.println("Arrêt");
-            pause = true;
+            this.pausePartie = true;
         }
 
     }
@@ -250,14 +249,19 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.017),
                 (ev ->{
 
+                    if ( this.environnement.getVague().getPause() ) {
+                        this.pausePartie = true ;
+                        //System.out.println("Pause pour pêcheurs (Nouvelle vague) ");
+                    }
+
                     if(environnement.getPvPropertyValue() <= 0) {
                         lancerecranGameOver();
                     }
 
-                    else if(environnement.getVague().getNumVague() >= 10){
+                    else if(environnement.getVague().getNumVague() >= 10 && environnement.getListePoissons().isEmpty()){
                         lancerEcranVictoire();
                     } else {
-                        if(!pause) {
+                        if(!pausePartie) {
                             environnement.faireUnTour();
                             temps++;
                         }
@@ -279,8 +283,12 @@ public class Controlleur implements Initializable {
 
         stage = (Stage) ((javafx.scene.Node) vueMap).getScene().getWindow();
         Scene scene = new Scene(root, 600, 400);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Poisson contre pêcheur");
+        if (this.stage != null) {
+            this.stage.setResizable(false);
+        }
+        else this.stage = new Stage() ;
+        // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Game Over");
         stage.setScene(scene);
         stage.show();
         gameLoop.stop();

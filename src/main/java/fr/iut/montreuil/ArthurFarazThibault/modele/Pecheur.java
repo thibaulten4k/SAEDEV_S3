@@ -5,6 +5,7 @@ public abstract class Pecheur extends Acteur{
     private int delai, portee, cout;
 
     private int compteurDelai;
+    protected static long compteurPecheur = 0;
 
     public Pecheur (int x, int y, int delai, int portee, int cout) {
         super(x, y, 16);
@@ -27,12 +28,18 @@ public abstract class Pecheur extends Acteur{
         compteurDelai = 0;
     }
 
+    @Override
+    public String genererId() {
+        compteurPecheur++;
+        return "Pech" + compteurPecheur;
+    }
+
     public void actionUnTour() {
         Environnement environnement = Environnement.getInstance();
 
         if (compteurDelai == delai) {
             for (Poisson p : environnement.getListePoissons()) {
-                if ( aPorteeDuPecheur(p) && compteurDelai == delai)  {
+                if ( aPorterDuPecheur(p) && compteurDelai == delai)  {
                     attaquer(p);
                     compteurDelai = 0;
                 }
@@ -45,7 +52,7 @@ public abstract class Pecheur extends Acteur{
 
     }
 
-    public boolean aPorteeDuPecheur(Poisson p) {
+    public boolean aPorterDuPecheur(Poisson p) {
         return ( ( Math.abs(p.getXpropertyValue() - this.getXpropertyValue()) + Math.abs(p.getYpropertyValue() - this.getYpropertyValue()) ) <= this.portee * Case.tailleCase + (Case.tailleCase/2) );
     }
 
